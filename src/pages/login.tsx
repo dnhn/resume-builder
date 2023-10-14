@@ -16,11 +16,11 @@ import { Logo } from 'components/Logo'
 import { toast } from 'components/Toast'
 
 const loginFormDefaultValues = {
-  email: process.env.NEXT_PUBLIC_EMAIL ?? '',
+  username: process.env.NEXT_PUBLIC_USERNAME ?? '',
   password: process.env.NEXT_PUBLIC_PASSWORD ?? '',
 }
 const validationSchema = z.object({
-  email: z.string(), // .email()
+  username: z.string(),
   password: z
     .string()
     .min(8, 'Password must be at least 8 characters long')
@@ -45,9 +45,9 @@ const LoginPage = () => {
   const onSubmit = async (data: typeof loginFormDefaultValues) => {
     setIsLoading(true)
     try {
-      await login(data.email, data.password)
+      await login(data.username, data.password)
     } catch (error) {
-      toast.error({ title: 'Invalid email or password' })
+      toast.error({ title: 'Invalid username or password' })
     } finally {
       setIsLoading(false)
     }
@@ -76,9 +76,9 @@ const LoginPage = () => {
         <FormProvider {...formInstance}>
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <FormInput
-              label="Email"
-              name="email"
-              placeholder="Email"
+              label="Username"
+              name="username"
+              placeholder="Username"
               rules={{ required: 'Required' }}
               fullWidth
             />
@@ -115,7 +115,7 @@ const LoginPage = () => {
               fullWidth
               onClick={() => {
                 onSubmit({
-                  email: 'demo@dwarves.foundation',
+                  username: 'demo@dwarves.foundation',
                   password: 'Testing@123',
                 })
               }}
