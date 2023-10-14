@@ -98,6 +98,7 @@
     "orval": "^6.17.0",
     "postcss": "^8.4.20",
     "prettier": "^2.8.1",
+    "prettier-plugin-tailwindcss": "^0.5.6",
     "rimraf": "^3.0.2",
     "standard-version": "^9.5.0",
     "storybook": "^7.0.12",
