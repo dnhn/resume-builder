@@ -15,15 +15,18 @@ import { ROUTES } from 'constants/routes'
 import { Logo } from 'components/Logo'
 import { toast } from 'components/Toast'
 
-const loginFormDefaultValues = { email: '', password: '' }
+const loginFormDefaultValues = {
+  email: process.env.NEXT_PUBLIC_EMAIL ?? '',
+  password: process.env.NEXT_PUBLIC_PASSWORD ?? '',
+}
 const validationSchema = z.object({
-  email: z.string().email(),
+  email: z.string(), // .email()
   password: z
     .string()
     .min(8, 'Password must be at least 8 characters long')
-    .regex(/[A-Z]/, {
-      message: 'Password must contain at least 1 uppercase letter',
-    })
+    // .regex(/[A-Z]/, {
+    //   message: 'Password must contain at least 1 uppercase letter',
+    // })
     .regex(/\d/, {
       message: 'Password must contain at least 1 numeric digit',
     }),
