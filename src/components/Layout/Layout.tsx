@@ -10,19 +10,14 @@ import { Header } from 'components/Header'
 import { useAuthContext } from 'context/auth'
 import { useEffect, useState } from 'react'
 import { IconBookOpen } from 'components/icons/components/IconBookOpen'
-import { IconSwitchVertical } from 'components/icons/components/IconSwitchVertical'
 
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
-  { name: 'Forms', href: ROUTES.FORMS, Icon: IconTable },
+  { name: 'Create', href: ROUTES.FORMS, Icon: IconTable },
+  { name: 'Résumé', href: ROUTES.RESUME, Icon: IconBookOpen },
   {
-    name: 'Data fetching',
-    href: ROUTES.DATA_FETCHING,
-    Icon: IconSwitchVertical,
-  },
-  {
-    name: 'Documentation',
-    href: 'https://github.com/dwarvesf/nextjs-boilerplate',
+    name: 'GitHub',
+    href: 'https://github.com/dnhn/resume-builder',
     Icon: IconBookOpen,
   },
 ]

@@ -20,21 +20,12 @@ class MyApp extends App {
         <Head>
           <meta content="IE=edge" httpEquiv="X-UA-Compatible" />
           <meta content="width=device-width, initial-scale=1" name="viewport" />
-          <title>NextJS boilerplate | Dwarves Foundation</title>
-          <meta
-            content="NextJS boilerplate | Dwarves Foundation"
-            property="og:title"
-          />
+          <title>Résumé Builder</title>
+          <meta content="Résumé Builder" property="og:title" />
           <meta content="@dwarvesf" name="twitter:site" />
           <meta content="summary_large_image" name="twitter:card" />
-          <meta
-            content="Opinionated React template for building web applications at scale."
-            name="description"
-          />
-          <meta
-            content="Opinionated React template for building web applications at scale."
-            property="og:description"
-          />
+          <meta content="Résumé Builder" name="description" />
+          <meta content="Résumé Builder" property="og:description" />
           <meta content="/thumbnail.jpeg" property="og:image" />
           <meta content="/thumbnail.jpeg" name="twitter:image" />
         </Head>
