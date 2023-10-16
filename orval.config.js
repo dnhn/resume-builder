@@ -29,18 +29,6 @@ const MOCK_LOGIN = {
   'data.email': () => 'demo@dwarves.foundation',
 }
 
-const MOCK_ME = {
-  'data.id': 2,
-  'data.email': 'demo@dwarves.foundation',
-  'data.avatar':
-    'https://avatars.githubusercontent.com/u/10388449?s=200\u0026v=4',
-  'data.role': 'user',
-  'data.status': 'active',
-  'data.fullName': 'Dwarvesf Demo',
-  'data.title': 'Demo',
-  'data.department': 'Dev',
-}
-
 export default defineConfig({
   app: {
     output: {
@@ -64,11 +52,6 @@ export default defineConfig({
           login: {
             mock: {
               properties: () => MOCK_LOGIN,
-            },
-          },
-          getMe: {
-            mock: {
-              properties: () => MOCK_ME,
             },
           },
         },
