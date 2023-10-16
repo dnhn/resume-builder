@@ -1,5 +1,6 @@
 const theme = require('tailwindcss/defaultTheme')
 const formPlugin = require('@tailwindcss/forms')
+const typographyPlugin = require('@tailwindcss/typography')
 const animatePlugin = require('tailwindcss-animate')
 
 module.exports = {
@@ -22,5 +23,5 @@ module.exports = {
       },
     },
   },
-  plugins: [formPlugin, animatePlugin],
+  plugins: [formPlugin, typographyPlugin, animatePlugin],
 }
