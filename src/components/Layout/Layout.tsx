@@ -1,5 +1,7 @@
 import { IconHome } from 'components/icons/components/IconHome'
-import { IconTable } from 'components/icons/components/IconTable'
+import { IconLinkSolid } from 'components/icons/components/IconLinkSolid'
+import { IconPaperClip } from 'components/icons/components/IconPaperClip'
+import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
 import { ROUTES } from 'constants/routes'
 import Link from 'next/link'
 import cx from 'classnames'
@@ -9,16 +11,15 @@ import { Logo } from 'components/Logo'
 import { Header } from 'components/Header'
 import { useAuthContext } from 'context/auth'
 import { useEffect, useState } from 'react'
-import { IconBookOpen } from 'components/icons/components/IconBookOpen'
 
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
-  { name: 'Create', href: ROUTES.FORMS, Icon: IconTable },
-  { name: 'Résumé', href: ROUTES.RESUME, Icon: IconBookOpen },
+  { name: 'Create', href: ROUTES.FORMS, Icon: IconPencilSolid },
+  { name: 'Résumé', href: ROUTES.RESUME, Icon: IconPaperClip },
   {
     name: 'GitHub',
     href: 'https://github.com/dnhn/resume-builder',
-    Icon: IconBookOpen,
+    Icon: IconLinkSolid,
   },
 ]
 
@@ -43,7 +44,7 @@ export const Layout = ({ children }: WithChildren) => {
 
   return (
     <div className="flex h-full bg-gray-100">
-      <aside className="w-72 bg-gray-800 min-h-screen p-4 flex justify-between flex-col">
+      <aside className="w-72 fixed left-0 top-0 bg-gray-800 min-h-screen p-4 flex justify-between flex-col">
         <div className="space-y-5">
           <Logo hasText />
           <nav className="space-y-1">
@@ -71,7 +72,7 @@ export const Layout = ({ children }: WithChildren) => {
           </nav>
         </div>
       </aside>
-      <main className="flex-1">
+      <main className="flex-1 pl-72">
         <Header />
         <div className="px-8 py-6">
           <div className="flex space-y-6 flex-col max-w-7xl w-full mx-auto">
