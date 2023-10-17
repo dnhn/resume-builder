@@ -26,6 +26,8 @@ export const requester = <T>(config: AxiosRequestConfig): Promise<T> => {
     config.headers = {
       ...config.headers,
       Authorization: `Bearer ${accessToken}`,
+      Origin: window.location.origin,
+      'Access-Control-Request-Method': config.method,
     }
   }
   // Add interceptors
