@@ -1,6 +1,5 @@
 import { IResume } from 'types/resume'
 import { Box } from 'components/Box'
-import { Heading } from 'components/Heading'
 import { ResumeProjectsEntry } from './ResumeProjectsEntry'
 
 export const ResumeProjects = ({
@@ -8,9 +7,9 @@ export const ResumeProjects = ({
 }: {
   resume: IResume
 }) => {
-  return projects.length ? (
+  return projects && projects.length ? (
     <Box>
-      <Heading as="h2">Projects</Heading>
+      <h3 className="text-gray-900 text-2xl font-bold uppercase">Projects</h3>
       {projects.map((project, index) => (
         <ResumeProjectsEntry key={index} data={project} />
       ))}

@@ -1,22 +1,23 @@
 import Link from 'next/link'
 import Markdown from 'react-markdown'
 
-import { Box } from 'components/Box'
-import { Heading } from 'components/Heading'
 import { IResumeProject } from 'types/resume'
+import { Box } from 'components/Box'
 
 export const ResumeProjectsEntry = ({ data }: { data: IResumeProject }) => {
+  const { name, link, description } = data
+
   return (
     <Box>
-      <Heading as="h3">{data.name}</Heading>
-      {data.link && (
-        <Link href={data.link} rel="noopener noreferrer" target="_blank">
-          {data.link}
+      <h4 className="text-gray-900 text-xl font-medium mb-0 mt-6">{name}</h4>
+      {link && (
+        <Link href={link} rel="noopener noreferrer" target="_blank">
+          {link}
         </Link>
       )}
-      {data.description && (
+      {description && (
         <div>
-          <Markdown>{data.description}</Markdown>
+          <Markdown>{description}</Markdown>
         </div>
       )}
     </Box>

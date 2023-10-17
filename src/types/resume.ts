@@ -37,8 +37,8 @@ export interface IResume {
   website?: string
   intro: string
   experience: IResumeExperience[]
-  projects: IResumeProject[]
-  education: IResumeEducation[]
-  skills: string[]
-  languages: IResumeLanguage[]
+  projects?: IResumeProject[]
+  education?: IResumeEducation[]
+  skills?: string[]
+  languages?: IResumeLanguage[]
 }
