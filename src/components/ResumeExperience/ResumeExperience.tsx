@@ -1,5 +1,6 @@
 import { IResume } from 'types/resume'
 import { Box } from 'components/Box'
+import { ResumeHeading } from 'components/ResumeHeading'
 import { ResumeExperienceEntry } from './ResumeExperienceEntry'
 
 export const ResumeExperience = ({
@@ -9,7 +10,7 @@ export const ResumeExperience = ({
 }) => {
   return (
     <Box>
-      <h3 className="text-gray-900 text-2xl font-bold uppercase">Experience</h3>
+      <ResumeHeading as="h3">Experience</ResumeHeading>
       {experience.map((exp, index) => (
         <ResumeExperienceEntry key={index} data={exp} />
       ))}

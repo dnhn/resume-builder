@@ -2,15 +2,14 @@ import Link from 'next/link'
 
 import { IResume } from 'types/resume'
 import { Box } from 'components/Box'
+import { ResumeHeading } from 'components/ResumeHeading'
 
 export const ResumeIntro = ({ resume }: { resume: IResume }) => {
   const externalUrl = resume.website?.startsWith('http')
 
   return (
     <Box>
-      <h2 className="mt-0 mb-2 text-gray-900 text-3xl font-bold">
-        {resume.name}
-      </h2>
+      <ResumeHeading className="mt-0 mb-2">{resume.name}</ResumeHeading>
       {resume.title && (
         <div className="text-xl mb-4 font-medium">{resume.title}</div>
       )}

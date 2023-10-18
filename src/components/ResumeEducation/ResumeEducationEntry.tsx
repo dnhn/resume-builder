@@ -3,16 +3,19 @@ import Markdown from 'react-markdown'
 import { Box } from 'components/Box'
 import { IResumeEducation } from 'types/resume'
 import { dateToMonthYear } from 'utils/formatDate'
+import { ResumeHeading } from 'components/ResumeHeading'
 
 export const ResumeEducationEntry = ({ data }: { data: IResumeEducation }) => {
   const { school, degree, field, startDate, endDate, description } = data
 
   return (
     <Box>
-      <h4 className="text-gray-900 text-xl font-medium mb-1 mt-6">{school}</h4>
-      <h5 className="text-gray-900 text-lg">
+      <ResumeHeading as="h4" className="mb-1 mt-6">
+        {school}
+      </ResumeHeading>
+      <ResumeHeading as="h5">
         {degree}, {field}
-      </h5>
+      </ResumeHeading>
       <div className="mt-2">
         {startDate && dateToMonthYear(startDate)}
         {startDate && endDate && '–'}

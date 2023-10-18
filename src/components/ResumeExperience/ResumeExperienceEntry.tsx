@@ -3,6 +3,7 @@ import Markdown from 'react-markdown'
 import { IResumeExperience } from 'types/resume'
 import { Box } from 'components/Box'
 import { dateToMonthYear } from 'utils/formatDate'
+import { ResumeHeading } from 'components/ResumeHeading'
 
 export const ResumeExperienceEntry = ({
   data,
@@ -13,8 +14,10 @@ export const ResumeExperienceEntry = ({
 
   return (
     <Box>
-      <h4 className="text-gray-900 text-xl font-medium mb-1 mt-6">{title}</h4>
-      <h5 className="text-gray-900 text-lg">{company}</h5>
+      <ResumeHeading as="h4" className="mb-1 mt-6">
+        {title}
+      </ResumeHeading>
+      <ResumeHeading as="h5">{company}</ResumeHeading>
       <div className="mt-2">
         {dateToMonthYear(startDate)}–
         {endDate ? dateToMonthYear(endDate) : 'present'}
