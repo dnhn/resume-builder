@@ -60,7 +60,15 @@ export default function Resume() {
 - list item 3`,
       },
     ],
-    skills: ['HTML', 'CSS', 'JavaScript', 'TypeScript', 'React.js', 'Next.js'],
+    skills: [
+      'HTML',
+      'CSS',
+      'Tailwind CSS',
+      'JavaScript',
+      'TypeScript',
+      'React.js',
+      'Next.js',
+    ],
     languages: [
       { name: 'Vietnamese', proficiency: 'native' },
       { name: 'English', proficiency: 'fluent' },

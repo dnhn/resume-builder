@@ -30,50 +30,58 @@ export const Layout = ({ children }: WithChildren) => {
   const { isLogin } = useAuthContext()
   const { push } = useRouter()
 
+  const resumePage = pathname.startsWith(ROUTES.RESUME)
+
   useEffect(() => {
-    if (!isLogin) {
+    if (!resumePage && !isLogin) {
       push(ROUTES.LOGIN)
     } else {
       setHydrated(true)
     }
-  }, [isLogin, push])
+  }, [isLogin, push, resumePage])
 
-  if (!isLogin || !hydrated) {
+  if ((!resumePage && !isLogin) || !hydrated) {
     return null
   }
 
   return (
     <div className="flex h-full bg-gray-100">
-      <aside className="w-72 fixed left-0 top-0 bg-gray-800 min-h-screen p-4 flex justify-between flex-col">
-        <div className="space-y-5">
-          <Logo hasText />
-          <nav className="space-y-1">
-            {menuItems.map(({ Icon, name, href }) => {
-              const external = href.startsWith('http')
-              return (
-                <Link
-                  key={name}
-                  className={cx(
-                    'flex w-full p-2 space-x-3 rounded-md',
-                    'bg-transparent duration-200 transition-all',
-                    {
-                      'bg-gray-900 text-gray-300': pathname === href,
-                      'text-gray-400 hover:text-gray-100': pathname !== href,
-                    },
-                  )}
-                  href={href}
-                  rel={external ? 'noopener' : undefined}
-                  target={external ? '_blank' : undefined}
-                >
-                  <Icon className="w-6 h-6" /> <span>{name}</span>
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
-      </aside>
-      <main className="flex-1 pl-72">
-        <Header />
+      {isLogin && (
+        <>
+          <aside className="w-72 fixed left-0 top-0 bg-gray-800 min-h-screen p-4 flex justify-between flex-col">
+            <div className="space-y-5">
+              <Logo hasText />
+              <nav className="space-y-1">
+                {menuItems.map(({ Icon, name, href }) => {
+                  const external = href.startsWith('http')
+                  return (
+                    <Link
+                      key={name}
+                      className={cx(
+                        'flex w-full p-2 space-x-3 rounded-md',
+                        'bg-transparent duration-200 transition-all',
+                        {
+                          'bg-gray-900 text-gray-300': pathname === href,
+                          'text-gray-400 hover:text-gray-100':
+                            pathname !== href,
+                        },
+                      )}
+                      href={href}
+                      rel={external ? 'noopener' : undefined}
+                      target={external ? '_blank' : undefined}
+                    >
+                      <Icon className="w-6 h-6" /> <span>{name}</span>
+                    </Link>
+                  )
+                })}
+              </nav>
+            </div>
+          </aside>
+          <div className="w-72" />
+        </>
+      )}
+      <main className="flex-1">
+        {isLogin && <Header />}
         <div className="px-8 py-6">
           <div className="flex space-y-6 flex-col max-w-7xl w-full mx-auto">
             {children}
