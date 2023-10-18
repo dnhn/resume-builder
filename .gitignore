@@ -20,7 +20,8 @@
 
 # misc
 .DS_Store
-.env.local
+.env*.local
+.vercel
 
 # debug
 npm-debug.log*
