@@ -6,9 +6,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { FormInput } from 'components/FormInput'
 import { Button } from 'components/Button'
-import { Text } from 'components/Text'
-import { Checkbox } from 'components/Checkbox'
-import { Divider } from 'components/Divider'
 import { useAuthContext } from 'context/auth'
 import { useRouter } from 'next/router'
 import { ROUTES } from 'constants/routes'
@@ -67,9 +64,6 @@ const LoginPage = () => {
         </div>
         <div className="space-y-1">
           <Heading as="h3">Sign in to your account</Heading>
-          <Text className="text-sm text-gray-500">
-            Or <Button appearance="link">start your 14-day free trial</Button>
-          </Text>
         </div>
       </div>
       <Card className="w-full max-w-[460px] !p-10">
@@ -90,12 +84,6 @@ const LoginPage = () => {
               type="password"
               fullWidth
             />
-            <div className="flex justify-between items-center">
-              <Checkbox>Remember me</Checkbox>
-              <Button appearance="link" type="button">
-                Forgot your password?
-              </Button>
-            </div>
 
             <Button
               appearance="primary"
@@ -105,22 +93,6 @@ const LoginPage = () => {
               fullWidth
             >
               Sign in
-            </Button>
-
-            <Divider>Or continue by</Divider>
-
-            <Button
-              disabled={isLoading}
-              type="button"
-              fullWidth
-              onClick={() => {
-                onSubmit({
-                  username: 'demo@dwarves.foundation',
-                  password: 'Testing@123',
-                })
-              }}
-            >
-              Use demo account
             </Button>
           </form>
         </FormProvider>
