@@ -14,7 +14,7 @@ import { useEffect, useState } from 'react'
 
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
-  { name: 'Create', href: ROUTES.FORMS, Icon: IconPencilSolid },
+  { name: 'Create', href: ROUTES.CREATE, Icon: IconPencilSolid },
   { name: 'Résumé', href: ROUTES.RESUME, Icon: IconPaperClip },
   {
     name: 'GitHub',

@@ -1,7 +1,6 @@
 export const ROUTES = {
   LOGIN: '/login',
   DASHBOARD: '/',
-  FORMS: '/create',
+  CREATE: '/create',
   RESUME: '/resume',
-  DATA_FETCHING: '/data-fetching',
 }
