@@ -102,7 +102,7 @@ export const Layout = ({ children }: WithChildren) => {
       )}
       <main className="flex-1">
         {isLogin && <Header />}
-        <div className="px-8 py-6">
+        <div className="px-8 py-16">
           <div className="flex space-y-6 flex-col max-w-7xl w-full mx-auto">
             {children}
           </div>

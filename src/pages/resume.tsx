@@ -1,5 +1,6 @@
 import { IResume } from 'types/resume'
 import { Layout } from 'components/Layout'
+import { ResumeInfo } from 'components/ResumeInfo'
 import { ResumeIntro } from 'components/ResumeIntro'
 import { ResumeExperience } from 'components/ResumeExperience'
 import { ResumeEducation } from 'components/ResumeEducation'
@@ -80,19 +81,24 @@ export default function Resume() {
 
   return (
     <Layout>
-      <section className="bg-white rounded-none shadow p-12 max-w-none prose prose-sm prose-p:[font-family:var(--font-libre-baskerville)] prose-a:underline-offset-2">
-        <ResumeIntro resume={data} />
-        <Divider />
-        <ResumeExperience resume={data} />
-        <Divider />
-        <ResumeProjects resume={data} />
-        <Divider />
-        <ResumeEducation resume={data} />
-        <Divider />
-        <ResumeSkills resume={data} />
-        <Divider />
-        <ResumeLanguages resume={data} />
-      </section>
+      <div className="bg-neutral-50 rounded-none shadow-md max-w-none prose prose-sm prose-p:[font-family:var(--font-libre-baskerville)] prose-a:underline-offset-2 grid grid-cols-7">
+        <div className="col-span-2 p-12 bg-slate-600 text-gray-100 prose-headings:text-white prose-a:text-white">
+          <ResumeInfo resume={data} />
+          <Divider />
+          <ResumeSkills resume={data} />
+          <Divider />
+          <ResumeLanguages resume={data} />
+        </div>
+        <div className="col-span-5 p-12">
+          <ResumeIntro resume={data} />
+          <Divider />
+          <ResumeExperience resume={data} />
+          <Divider />
+          <ResumeProjects resume={data} />
+          <Divider />
+          <ResumeEducation resume={data} />
+        </div>
+      </div>
     </Layout>
   )
 }

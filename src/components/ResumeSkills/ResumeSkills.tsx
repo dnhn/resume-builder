@@ -9,7 +9,9 @@ export const ResumeSkills = ({ resume: { skills } }: { resume: IResume }) => {
       <ResumeHeading as="h3">Skills</ResumeHeading>
       <div className="flex flex-wrap gap-4 mt-6">
         {skills.map((skill, index) => (
-          <Badge key={index}>{skill}</Badge>
+          <Badge key={index} className="font-semibold">
+            {skill}
+          </Badge>
         ))}
       </div>
     </ResumeSection>
