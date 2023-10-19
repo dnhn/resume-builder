@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { IResume } from 'types/resume'
 import { Box } from 'components/Box'
 import { ResumeHeading } from 'components/ResumeHeading'
-import { Text } from 'components/Text'
 
 export const ResumeIntro = ({ resume }: { resume: IResume }) => {
   const externalUrl = resume.website?.startsWith('http')
@@ -12,13 +11,13 @@ export const ResumeIntro = ({ resume }: { resume: IResume }) => {
     <Box>
       <ResumeHeading className="mt-0 mb-2">{resume.name}</ResumeHeading>
       {resume.title && (
-        <Text className="text-xl mb-4 font-medium">{resume.title}</Text>
+        <div className="text-xl mb-4 font-medium">{resume.title}</div>
       )}
       {resume.address && (
         <address className="not-italic">{resume.address}</address>
       )}
       {(resume.phoneNumber || resume.email || resume.website) && (
-        <Text className="flex gap-4 flex-wrap mt-0">
+        <p className="flex gap-4 flex-wrap mt-0 prose-a:[font-family:var(--font-raleway)]">
           {resume.phoneNumber && (
             <a href={`tel:${resume.phoneNumber}`}>{resume.phoneNumber}</a>
           )}
@@ -34,9 +33,9 @@ export const ResumeIntro = ({ resume }: { resume: IResume }) => {
               {resume.website}
             </Link>
           )}
-        </Text>
+        </p>
       )}
-      <Text>{resume.intro}</Text>
+      <p className="mb-0">{resume.intro}</p>
     </Box>
   )
 }

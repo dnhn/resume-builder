@@ -24,7 +24,7 @@ export const ResumeExperienceEntry = ({
         {endDate ? dateToMonthYear(endDate) : 'present'}
       </Text>
       {description && (
-        <div>
+        <div className="[font-family:var(--font-libre-baskerville)]">
           <Markdown>{description}</Markdown>
         </div>
       )}

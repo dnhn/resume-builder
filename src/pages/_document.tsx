@@ -17,19 +17,8 @@ export default function Document() {
           sizes="32x32"
           type="image/png"
         />
-        <link href="https://fonts.googleapis.com" rel="preconnect" />
         <link href="https://static.cloudflareinsights.com" rel="preconnect" />
         <meta content="#E13F5E" name="theme-color" />
-        <link href="https://fonts.googleapis.com" rel="preconnect" />
-        <link
-          crossOrigin="auto"
-          href="https://fonts.gstatic.com"
-          rel="preconnect"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap"
-          rel="stylesheet"
-        />
       </Head>
       <body>
         <Main />

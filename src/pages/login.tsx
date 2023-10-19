@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import cx from 'classnames'
 import { Card } from 'components/Card'
 import { Heading } from 'components/Heading'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -12,6 +13,12 @@ import { ROUTES } from 'constants/routes'
 import { Logo } from 'components/Logo'
 import { toast } from 'components/Toast'
 
+import { Raleway } from 'next/font/google'
+
+const fontFamily = Raleway({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+})
 const loginFormDefaultValues = {
   username: process.env.NEXT_PUBLIC_USERNAME ?? '',
   password: process.env.NEXT_PUBLIC_PASSWORD ?? '',
@@ -57,7 +64,12 @@ const LoginPage = () => {
   }, [isLogin, push])
 
   return (
-    <div className="w-full min-h-screen flex-col flex justify-center items-center space-y-8 bg-gray-100 pt-8 pb-28">
+    <div
+      className={cx(
+        'w-full min-h-screen flex-col flex justify-center items-center space-y-8 bg-gray-100 pt-8 pb-28',
+        fontFamily.className,
+      )}
+    >
       <div className="text-center flex flex-col items-center">
         <div className="mb-6 transform scale-125">
           <Logo />

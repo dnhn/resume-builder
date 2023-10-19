@@ -1,7 +1,6 @@
 import { IResume } from 'types/resume'
 import { Box } from 'components/Box'
 import { ResumeHeading } from 'components/ResumeHeading'
-import { Text } from 'components/Text'
 
 export const ResumeLanguages = ({
   resume: { languages },
@@ -13,19 +12,14 @@ export const ResumeLanguages = ({
       <ResumeHeading as="h3">Languages</ResumeHeading>
       <div className="flex flex-wrap gap-x-8 gap-y-3 mt-6">
         {languages.map((lang, index) => (
-          <div key={index}>
-            <Text as="span" className="font-semibold">
-              {lang.name}
-            </Text>
+          <p key={index} className="m-0">
+            <span className="font-semibold">{lang.name}</span>
             {lang.proficiency && (
               <>
-                :{' '}
-                <Text as="span" className="capitalize">
-                  {lang.proficiency}
-                </Text>
+                : <span className="capitalize">{lang.proficiency}</span>
               </>
             )}
-          </div>
+          </p>
         ))}
       </div>
     </Box>

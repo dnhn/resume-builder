@@ -79,7 +79,7 @@ export default function Resume() {
 
   return (
     <Layout>
-      <section className="bg-white rounded-none shadow px-12 py-16 max-w-none prose prose-sm">
+      <section className="bg-white rounded-none shadow p-12 max-w-none prose prose-sm prose-p:[font-family:var(--font-libre-baskerville)] prose-a:underline-offset-2">
         <ResumeIntro resume={data} />
         <ResumeExperience resume={data} />
         <ResumeProjects resume={data} />
