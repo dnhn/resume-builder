@@ -24,9 +24,9 @@ export const ResumeProjectsEntry = ({ data }: { data: IResumeProject }) => {
         </Link>
       )}
       {description && (
-        <div className="[font-family:var(--font-libre-baskerville)]">
-          <Markdown>{description}</Markdown>
-        </div>
+        <Markdown className="[font-family:var(--font-libre-baskerville)]">
+          {description}
+        </Markdown>
       )}
     </Box>
   )

@@ -4,7 +4,6 @@ import { Box } from 'components/Box'
 import { IResumeEducation } from 'types/resume'
 import { dateToMonthYear } from 'utils/formatDate'
 import { ResumeHeading } from 'components/ResumeHeading'
-import { Text } from 'components/Text'
 
 export const ResumeEducationEntry = ({ data }: { data: IResumeEducation }) => {
   const { school, degree, field, startDate, endDate, description } = data
@@ -17,15 +16,15 @@ export const ResumeEducationEntry = ({ data }: { data: IResumeEducation }) => {
       <ResumeHeading as="h5">
         {degree}, {field}
       </ResumeHeading>
-      <Text className="mt-2">
+      <ResumeHeading as="h6" className="mt-2">
         {startDate && dateToMonthYear(startDate)}
         {startDate && endDate && '–'}
         {endDate ? dateToMonthYear(endDate) : 'present'}
-      </Text>
+      </ResumeHeading>
       {description && (
-        <div className="[font-family:var(--font-libre-baskerville)]">
-          <Markdown>{description}</Markdown>
-        </div>
+        <Markdown className="[font-family:var(--font-libre-baskerville)]">
+          {description}
+        </Markdown>
       )}
     </Box>
   )

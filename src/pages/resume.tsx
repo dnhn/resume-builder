@@ -6,6 +6,7 @@ import { ResumeEducation } from 'components/ResumeEducation'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { ResumeProjects } from 'components/ResumeProjects'
 import { ResumeLanguages } from 'components/ResumeLanguages'
+import { Divider } from 'components/Divider'
 
 export default function Resume() {
   const data: IResume = {
@@ -81,10 +82,15 @@ export default function Resume() {
     <Layout>
       <section className="bg-white rounded-none shadow p-12 max-w-none prose prose-sm prose-p:[font-family:var(--font-libre-baskerville)] prose-a:underline-offset-2">
         <ResumeIntro resume={data} />
+        <Divider />
         <ResumeExperience resume={data} />
+        <Divider />
         <ResumeProjects resume={data} />
+        <Divider />
         <ResumeEducation resume={data} />
+        <Divider />
         <ResumeSkills resume={data} />
+        <Divider />
         <ResumeLanguages resume={data} />
       </section>
     </Layout>

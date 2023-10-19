@@ -1,14 +1,14 @@
 import Link from 'next/link'
 
 import { IResume } from 'types/resume'
-import { Box } from 'components/Box'
 import { ResumeHeading } from 'components/ResumeHeading'
+import { ResumeSection } from 'components/ResumeSection'
 
 export const ResumeIntro = ({ resume }: { resume: IResume }) => {
   const externalUrl = resume.website?.startsWith('http')
 
   return (
-    <Box>
+    <ResumeSection>
       <ResumeHeading className="mt-0 mb-2">{resume.name}</ResumeHeading>
       {resume.title && (
         <div className="text-xl mb-4 font-medium">{resume.title}</div>
@@ -36,6 +36,6 @@ export const ResumeIntro = ({ resume }: { resume: IResume }) => {
         </p>
       )}
       <p className="mb-0">{resume.intro}</p>
-    </Box>
+    </ResumeSection>
   )
 }

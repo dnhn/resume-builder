@@ -1,6 +1,6 @@
 import { IResume } from 'types/resume'
-import { Box } from 'components/Box'
 import { ResumeHeading } from 'components/ResumeHeading'
+import { ResumeSection } from 'components/ResumeSection'
 import { ResumeEducationEntry } from './ResumeEducationEntry'
 
 export const ResumeEducation = ({
@@ -9,11 +9,11 @@ export const ResumeEducation = ({
   resume: IResume
 }) => {
   return education && education.length ? (
-    <Box>
+    <ResumeSection>
       <ResumeHeading as="h3">Education</ResumeHeading>
       {education.map((edu, index) => (
         <ResumeEducationEntry key={index} data={edu} />
       ))}
-    </Box>
+    </ResumeSection>
   ) : null
 }
