@@ -34,7 +34,7 @@ export interface IResumeEducation {
 
 export interface IResumeLanguage {
   name: string
-  proficiency?: 'basic' | 'conversational' | 'fluent' | 'native'
+  proficiency?: string
 }
 
 export interface IResume extends IResumeInfo {

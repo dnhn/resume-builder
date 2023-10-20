@@ -1,19 +1,19 @@
-import { IResume } from 'types/resume'
+import { IResumeLanguage } from 'types/resume'
 import { ResumeHeading } from 'components/ResumeHeading'
 import { ResumeSection } from 'components/ResumeSection'
 
 export const ResumeLanguages = ({
-  resume: { languages },
+  languages,
 }: {
-  resume: IResume
+  languages: IResumeLanguage[]
 }) => {
-  return languages && languages.length ? (
+  return (
     <ResumeSection>
       <ResumeHeading>Languages</ResumeHeading>
       <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
         {languages.map((lang, index) => (
           <p key={index} className="m-0">
-            <span className="font-semibold">{lang.name}</span>
+            <span className="font-bold capitalize">{lang.name}</span>
             {lang.proficiency && (
               <>
                 : <span className="capitalize">{lang.proficiency}</span>
@@ -23,5 +23,5 @@ export const ResumeLanguages = ({
         ))}
       </div>
     </ResumeSection>
-  ) : null
+  )
 }

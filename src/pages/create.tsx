@@ -3,19 +3,22 @@ import { Card } from 'components/Card'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
 import { Layout } from 'components/Layout'
-import { InfoForm, SkillsForm } from 'components/ResumeForm'
+import { InfoForm, LanguagesForm, SkillsForm } from 'components/ResumeForm'
 import { ResumeInfo } from 'components/ResumeInfo'
+import { ResumeLanguages } from 'components/ResumeLanguages'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
 import { useState } from 'react'
-import { IResumeInfo } from 'types/resume'
+import { IResumeInfo, IResumeLanguage } from 'types/resume'
 
 const FormsPage = () => {
   const [info, setInfo] = useState<IResumeInfo>({ name: '' })
   const [skills, setSkills] = useState<string[]>([])
+  const [languages, setLanguages] = useState<IResumeLanguage[]>([])
 
   const [infoEdit, setInfoEdit] = useState(true)
   const [skillsEdit, setSkillsEdit] = useState(true)
+  const [languagesEdit, setLanguagesEdit] = useState(true)
 
   return (
     <Layout>
@@ -64,6 +67,29 @@ const FormsPage = () => {
                   size="sm"
                   type="button"
                   onClick={() => setSkillsEdit((value) => !value)}
+                >
+                  <IconPencilSolid />
+                </Button>
+              </span>
+            </div>
+          )}
+          <Divider />
+          {languagesEdit ? (
+            <Card>
+              <LanguagesForm
+                data={languages}
+                handleSave={setLanguages}
+                onComplete={() => setLanguagesEdit(false)}
+              />
+            </Card>
+          ) : (
+            <div className="relative">
+              <ResumeLanguages languages={languages} />
+              <span className="absolute top-0 right-0">
+                <Button
+                  size="sm"
+                  type="button"
+                  onClick={() => setLanguagesEdit((value) => !value)}
                 >
                   <IconPencilSolid />
                 </Button>

@@ -89,7 +89,9 @@ export default function Resume() {
             <ResumeSkills skills={data.skills} />
           ) : null}
           <Divider />
-          <ResumeLanguages resume={data} />
+          {data.languages && data.languages.length ? (
+            <ResumeLanguages languages={data.languages} />
+          ) : null}
         </div>
         <div className="col-span-7 p-12">
           <ResumeIntro resume={data} />
