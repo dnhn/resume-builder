@@ -1,5 +1,14 @@
 // @ts-ignore
 
+export interface IResumeInfo {
+  name: string
+  title?: string
+  address?: string
+  phoneNumber?: string
+  email?: string
+  website?: string
+}
+
 export interface IResumeExperience {
   title: string
   company: string
@@ -28,13 +37,7 @@ export interface IResumeLanguage {
   proficiency?: 'basic' | 'conversational' | 'fluent' | 'native'
 }
 
-export interface IResume {
-  name: string
-  title?: string
-  address?: string
-  phoneNumber?: string
-  email?: string
-  website?: string
+export interface IResume extends IResumeInfo {
   intro: string
   experience: IResumeExperience[]
   projects?: IResumeProject[]
