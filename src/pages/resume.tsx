@@ -85,7 +85,9 @@ export default function Resume() {
         <div className="col-span-3 bg-slate-600 p-12 text-gray-100 prose-headings:text-white prose-a:text-white">
           <ResumeInfo resume={data} />
           <Divider />
-          <ResumeSkills resume={data} />
+          {data.skills && data.skills.length ? (
+            <ResumeSkills skills={data.skills} />
+          ) : null}
           <Divider />
           <ResumeLanguages resume={data} />
         </div>
