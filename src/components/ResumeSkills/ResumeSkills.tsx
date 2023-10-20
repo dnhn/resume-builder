@@ -7,7 +7,7 @@ export const ResumeSkills = ({ resume: { skills } }: { resume: IResume }) => {
   return skills && skills.length ? (
     <ResumeSection>
       <ResumeHeading as="h3">Skills</ResumeHeading>
-      <div className="flex flex-wrap gap-4 mt-6">
+      <div className="mt-6 flex flex-wrap gap-4">
         {skills.map((skill, index) => (
           <Badge key={index} className="font-semibold">
             {skill}

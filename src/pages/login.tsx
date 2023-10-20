@@ -66,12 +66,12 @@ const LoginPage = () => {
   return (
     <div
       className={cx(
-        'w-full min-h-screen flex-col flex justify-center items-center space-y-8 bg-gray-100 pt-8 pb-28',
+        'flex min-h-screen w-full flex-col items-center justify-center space-y-8 bg-gray-100 pt-8 pb-28',
         fontFamily.className,
       )}
     >
-      <div className="text-center flex flex-col items-center">
-        <div className="mb-6 transform scale-125">
+      <div className="flex flex-col items-center text-center">
+        <div className="mb-6 scale-125 transform">
           <Logo />
         </div>
         <div className="space-y-1">
@@ -86,6 +86,7 @@ const LoginPage = () => {
               name="username"
               placeholder="Username"
               rules={{ required: 'Required' }}
+              autoFocus
               fullWidth
             />
             <FormInput

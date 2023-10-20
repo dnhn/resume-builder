@@ -81,8 +81,8 @@ export default function Resume() {
 
   return (
     <Layout>
-      <div className="bg-neutral-50 rounded-none shadow-md max-w-none prose prose-sm prose-p:font-serif prose-a:underline-offset-2 grid grid-cols-7 prose-a:font-sans">
-        <div className="col-span-2 p-12 bg-slate-600 text-gray-100 prose-headings:text-white prose-a:text-white">
+      <div className="prose prose-sm grid max-w-none grid-cols-7 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2">
+        <div className="col-span-2 bg-slate-600 p-12 text-gray-100 prose-headings:text-white prose-a:text-white">
           <ResumeInfo resume={data} />
           <Divider />
           <ResumeSkills resume={data} />

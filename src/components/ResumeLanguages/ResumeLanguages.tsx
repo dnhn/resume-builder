@@ -10,7 +10,7 @@ export const ResumeLanguages = ({
   return languages && languages.length ? (
     <ResumeSection>
       <ResumeHeading as="h3">Languages</ResumeHeading>
-      <div className="flex flex-wrap gap-x-8 gap-y-3 mt-6">
+      <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
         {languages.map((lang, index) => (
           <p key={index} className="m-0">
             <span className="font-semibold">{lang.name}</span>

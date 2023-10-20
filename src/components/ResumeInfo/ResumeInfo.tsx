@@ -13,7 +13,7 @@ export const ResumeInfo = ({ resume }: { resume: IResume }) => {
         {resume.name}
       </ResumeHeading>
       {resume.title && (
-        <div className="text-xl mb-8 text-center font-medium">
+        <div className="mb-8 text-center text-xl font-medium">
           {resume.title}
         </div>
       )}
@@ -21,7 +21,7 @@ export const ResumeInfo = ({ resume }: { resume: IResume }) => {
         <address className="not-italic">{resume.address}</address>
       )}
       {(resume.phoneNumber || resume.email || resume.website) && (
-        <p className="flex gap-x-4 gap-y-1 flex-wrap m-0">
+        <p className="m-0 flex flex-wrap gap-x-4 gap-y-1">
           {resume.phoneNumber && (
             <a href={`tel:${resume.phoneNumber}`}>{resume.phoneNumber}</a>
           )}
