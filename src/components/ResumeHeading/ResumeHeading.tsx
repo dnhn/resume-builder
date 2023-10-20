@@ -3,7 +3,7 @@ import cx from 'classnames'
 import styles from './ResumeHeading.style'
 
 interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
-  as?: 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  as?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5'
 }
 
 export const ResumeHeading: React.FC<HeadingProps> = (props) => {

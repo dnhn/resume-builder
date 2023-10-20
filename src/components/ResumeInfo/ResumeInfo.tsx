@@ -8,20 +8,18 @@ export const ResumeInfo = ({ resume }: { resume: IResume }) => {
   const externalUrl = resume.website?.startsWith('http')
 
   return (
-    <ResumeSection>
-      <ResumeHeading className="mt-0 mb-2 text-center">
+    <ResumeSection className="text-center">
+      <ResumeHeading as="h1" className="mt-0 mb-4">
         {resume.name}
       </ResumeHeading>
       {resume.title && (
-        <div className="mb-8 text-center text-xl font-medium">
-          {resume.title}
-        </div>
+        <div className="mb-8 text-xl font-medium">{resume.title}</div>
       )}
       {resume.address && (
         <address className="not-italic">{resume.address}</address>
       )}
       {(resume.phoneNumber || resume.email || resume.website) && (
-        <p className="m-0 flex flex-wrap gap-x-4 gap-y-1">
+        <p className="m-0 flex flex-wrap justify-center gap-x-4 gap-y-1">
           {resume.phoneNumber && (
             <a href={`tel:${resume.phoneNumber}`}>{resume.phoneNumber}</a>
           )}

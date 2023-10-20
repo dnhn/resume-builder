@@ -4,11 +4,11 @@ const styles = tv({
   base: 'text-lg leading-snug mt-0',
   variants: {
     size: {
-      h2: 'text-3xl',
-      h3: 'text-2xl uppercase',
-      h4: 'text-xl',
-      h5: 'text-lg',
-      h6: 'text-sm',
+      h1: 'text-4xl',
+      h2: 'text-2xl uppercase',
+      h3: 'text-xl',
+      h4: 'text-lg',
+      h5: 'text-sm',
     },
   },
   defaultVariants: {
@@ -16,11 +16,11 @@ const styles = tv({
   },
   compoundVariants: [
     {
-      size: ['h2', 'h3'],
+      size: ['h1', 'h2'],
       className: 'font-bold',
     },
     {
-      size: ['h4', 'h6'],
+      size: ['h3', 'h5'],
       className: 'font-medium',
     },
   ],

@@ -10,7 +10,7 @@ export const ResumeProjects = ({
 }) => {
   return projects && projects.length ? (
     <ResumeSection>
-      <ResumeHeading as="h3">Projects</ResumeHeading>
+      <ResumeHeading>Projects</ResumeHeading>
       {projects.map((project, index) => (
         <ResumeProjectsEntry key={index} data={project} />
       ))}

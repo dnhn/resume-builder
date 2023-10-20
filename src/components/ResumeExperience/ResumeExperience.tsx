@@ -10,7 +10,7 @@ export const ResumeExperience = ({
 }) => {
   return (
     <ResumeSection>
-      <ResumeHeading as="h3">Experience</ResumeHeading>
+      <ResumeHeading>Experience</ResumeHeading>
       {experience.map((exp, index) => (
         <ResumeExperienceEntry key={index} data={exp} />
       ))}

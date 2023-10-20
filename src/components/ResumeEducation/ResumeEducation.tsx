@@ -10,7 +10,7 @@ export const ResumeEducation = ({
 }) => {
   return education && education.length ? (
     <ResumeSection>
-      <ResumeHeading as="h3">Education</ResumeHeading>
+      <ResumeHeading>Education</ResumeHeading>
       {education.map((edu, index) => (
         <ResumeEducationEntry key={index} data={edu} />
       ))}

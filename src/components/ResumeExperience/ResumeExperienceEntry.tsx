@@ -14,11 +14,11 @@ export const ResumeExperienceEntry = ({
 
   return (
     <Box>
-      <ResumeHeading as="h4" className="mb-1 mt-6">
+      <ResumeHeading as="h3" className="mb-1 mt-6">
         {title}
       </ResumeHeading>
-      <ResumeHeading as="h5">{company}</ResumeHeading>
-      <ResumeHeading as="h6" className="mt-2">
+      <ResumeHeading as="h4">{company}</ResumeHeading>
+      <ResumeHeading as="h5" className="mt-2">
         {dateToMonthYear(startDate)}–
         {endDate ? dateToMonthYear(endDate) : 'present'}
       </ResumeHeading>

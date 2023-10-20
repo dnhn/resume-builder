@@ -10,13 +10,13 @@ export const ResumeEducationEntry = ({ data }: { data: IResumeEducation }) => {
 
   return (
     <Box>
-      <ResumeHeading as="h4" className="mb-1 mt-6">
+      <ResumeHeading as="h3" className="mb-1 mt-6">
         {school}
       </ResumeHeading>
-      <ResumeHeading as="h5">
+      <ResumeHeading as="h4">
         {degree}, {field}
       </ResumeHeading>
-      <ResumeHeading as="h6" className="mt-2">
+      <ResumeHeading as="h5" className="mt-2">
         {startDate && dateToMonthYear(startDate)}
         {startDate && endDate && '–'}
         {endDate ? dateToMonthYear(endDate) : 'present'}

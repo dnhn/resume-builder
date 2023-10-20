@@ -1,5 +1,9 @@
 import { HTMLAttributes } from 'react'
+import cx from 'classnames'
 
-export const ResumeSection = ({ children }: HTMLAttributes<HTMLElement>) => {
-  return <section className="py-6">{children}</section>
+export const ResumeSection = ({
+  children,
+  ...other
+}: HTMLAttributes<HTMLElement>) => {
+  return <section className={cx('py-6', other.className)}>{children}</section>
 }

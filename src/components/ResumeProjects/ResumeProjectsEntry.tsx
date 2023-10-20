@@ -10,7 +10,7 @@ export const ResumeProjectsEntry = ({ data }: { data: IResumeProject }) => {
 
   return (
     <Box>
-      <ResumeHeading as="h4" className="mb-1 mt-6">
+      <ResumeHeading as="h3" className="mb-1 mt-6">
         {name}
       </ResumeHeading>
       {link && (
