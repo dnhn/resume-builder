@@ -30,7 +30,7 @@ export const ProfileModal = (props: Props) => {
   const { trigger, open, onOpenChange } = props
   const { user } = useAuthContext()
   const formInstance = useForm({
-    defaultValues: { fullName: user?.fullName },
+    defaultValues: { fullName: user },
     resolver: zodResolver(validationSchema),
   })
   const { handleSubmit } = formInstance
@@ -52,7 +52,7 @@ export const ProfileModal = (props: Props) => {
           <DialogDescription>
             <FormProvider {...formInstance}>
               <form className="mt-5" onSubmit={handleSubmit(onSubmit)}>
-                <div className="space-y-5 mb-8">
+                <div className="mb-8 space-y-5">
                   <FormInput
                     label="Full name"
                     name="fullName"

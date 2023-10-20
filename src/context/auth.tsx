@@ -1,14 +1,14 @@
 import { createContext, isSSR } from '@dwarvesf/react-utils'
 import { useCallback, useEffect, useState } from 'react'
 import { WithChildren } from 'types/common'
-import { Me, login as signIn } from 'api'
+import { login as signIn } from 'api'
 import { emitter } from 'utils/emitter'
 
 interface AuthContextValues {
   isLogin: boolean
   login: (email: string, password: string) => Promise<any>
   logout: () => void
-  user?: Me
+  user: string
 }
 
 const [Provider, useAuthContext] = createContext<AuthContextValues>({
@@ -27,22 +27,28 @@ const AuthContextProvider = ({ children }: WithChildren) => {
   const [isLogin, setIsLogin] = useState(() => {
     return isSSR() ? false : Boolean(window.localStorage.getItem(tokenKey))
   })
-  const [user] = useState<Me>()
+  const [user, setUser] = useState(() => {
+    return isSSR() ? '' : window.localStorage.getItem(userKey) || ''
+  })
 
   const login = useCallback(async (username: string, password: string) => {
     try {
       const res = await signIn({ username, password })
+
       if (res.data) {
         setIsLogin(true)
+        setUser(res.data.username)
         window.localStorage.setItem(tokenKey, res.data.accessToken)
+        window.localStorage.setItem(userKey, res.data.username)
       }
     } catch (error) {
-      throw new Error('Incorrect email or password')
+      throw new Error('Incorrect username or password!')
     }
   }, [])
 
   const logout = useCallback(() => {
     setIsLogin(false)
+    setUser('')
     cleanAuth()
   }, [])
 
