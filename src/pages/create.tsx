@@ -3,8 +3,14 @@ import { Card } from 'components/Card'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
 import { Layout } from 'components/Layout'
-import { InfoForm, LanguagesForm, SkillsForm } from 'components/ResumeForm'
+import {
+  InfoForm,
+  IntroForm,
+  LanguagesForm,
+  SkillsForm,
+} from 'components/ResumeForm'
 import { ResumeInfo } from 'components/ResumeInfo'
+import { ResumeIntro } from 'components/ResumeIntro'
 import { ResumeLanguages } from 'components/ResumeLanguages'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
@@ -15,10 +21,12 @@ const FormsPage = () => {
   const [info, setInfo] = useState<IResumeInfo>({ name: '' })
   const [skills, setSkills] = useState<string[]>([])
   const [languages, setLanguages] = useState<IResumeLanguage[]>([])
+  const [intro, setIntro] = useState('')
 
   const [infoEdit, setInfoEdit] = useState(true)
   const [skillsEdit, setSkillsEdit] = useState(true)
   const [languagesEdit, setLanguagesEdit] = useState(true)
+  const [introEdit, setIntroEdit] = useState(true)
 
   return (
     <Layout>
@@ -90,6 +98,29 @@ const FormsPage = () => {
                   size="sm"
                   type="button"
                   onClick={() => setLanguagesEdit((value) => !value)}
+                >
+                  <IconPencilSolid />
+                </Button>
+              </span>
+            </div>
+          )}
+        </div>
+        <div className="col-span-7 p-6 xl:p-12">
+          {introEdit ? (
+            <IntroForm
+              data={intro}
+              handleSave={setIntro}
+              onComplete={() => setIntroEdit(false)}
+            />
+          ) : (
+            <div className="relative">
+              <ResumeIntro intro={intro} />
+              <span className="absolute top-0 right-0">
+                <Button
+                  appearance="secondary"
+                  size="sm"
+                  type="button"
+                  onClick={() => setIntroEdit((value) => !value)}
                 >
                   <IconPencilSolid />
                 </Button>

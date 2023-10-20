@@ -94,7 +94,7 @@ export default function Resume() {
           ) : null}
         </div>
         <div className="col-span-7 p-12">
-          <ResumeIntro resume={data} />
+          {data.intro && <ResumeIntro intro={data.intro} />}
           <Divider />
           <ResumeExperience resume={data} />
           <Divider />
