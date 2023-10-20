@@ -11,19 +11,6 @@ import { Logo } from 'components/Logo'
 import { Header } from 'components/Header'
 import { useAuthContext } from 'context/auth'
 import { useEffect, useState } from 'react'
-import { Libre_Baskerville, Raleway } from 'next/font/google'
-
-const fontSans = Raleway({
-  variable: '--font-raleway',
-  weight: ['400', '500', '600', '700'],
-  subsets: ['latin'],
-})
-
-const fontSerif = Libre_Baskerville({
-  variable: '--font-libre-baskerville',
-  weight: ['400', '700'],
-  subsets: ['latin'],
-})
 
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
@@ -58,14 +45,7 @@ export const Layout = ({ children }: WithChildren) => {
   }
 
   return (
-    <div
-      className={cx(
-        'flex h-full bg-gray-100',
-        fontSans.className,
-        fontSans.variable,
-        fontSerif.variable,
-      )}
-    >
+    <div className="flex h-full bg-gray-100">
       {isLogin && (
         <>
           <aside className="w-72 fixed left-0 top-0 bg-gray-800 min-h-screen p-4 flex justify-between flex-col">

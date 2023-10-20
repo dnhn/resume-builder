@@ -22,11 +22,7 @@ export const ResumeExperienceEntry = ({
         {dateToMonthYear(startDate)}–
         {endDate ? dateToMonthYear(endDate) : 'present'}
       </ResumeHeading>
-      {description && (
-        <Markdown className="[font-family:var(--font-libre-baskerville)]">
-          {description}
-        </Markdown>
-      )}
+      {description && <Markdown className="font-serif">{description}</Markdown>}
     </Box>
   )
 }

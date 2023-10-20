@@ -1,3 +1,4 @@
+const theme = require('tailwindcss/defaultTheme')
 const formPlugin = require('@tailwindcss/forms')
 const typographyPlugin = require('@tailwindcss/typography')
 const animatePlugin = require('tailwindcss-animate')
@@ -9,6 +10,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        ...theme.fontFamily,
+        sans: ['var(--font-raleway)', ...theme.fontFamily.sans],
+        serif: ['var(--font-libre-baskerville)', ...theme.fontFamily.serif],
+      },
       colors: {
         pink: {
           500: '#E4526E',

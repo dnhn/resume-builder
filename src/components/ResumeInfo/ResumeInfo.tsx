@@ -21,7 +21,7 @@ export const ResumeInfo = ({ resume }: { resume: IResume }) => {
         <address className="not-italic">{resume.address}</address>
       )}
       {(resume.phoneNumber || resume.email || resume.website) && (
-        <p className="flex gap-x-4 gap-y-1 flex-wrap m-0 prose-a:[font-family:var(--font-raleway)]">
+        <p className="flex gap-x-4 gap-y-1 flex-wrap m-0">
           {resume.phoneNumber && (
             <a href={`tel:${resume.phoneNumber}`}>{resume.phoneNumber}</a>
           )}

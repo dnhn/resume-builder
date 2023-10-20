@@ -23,11 +23,7 @@ export const ResumeProjectsEntry = ({ data }: { data: IResumeProject }) => {
           {link}
         </Link>
       )}
-      {description && (
-        <Markdown className="[font-family:var(--font-libre-baskerville)]">
-          {description}
-        </Markdown>
-      )}
+      {description && <Markdown className="font-serif">{description}</Markdown>}
     </Box>
   )
 }
