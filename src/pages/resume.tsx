@@ -39,10 +39,10 @@ export default function Resume() {
       {
         name: 'Next.js Boilerplate',
         link: 'https://github.com/dwarvesf/nextjs-boilerplate',
-        description: `An opinionated production-ready frontend boilerplate built on top of NextJS, shipped with:
+        description: `An opinionated production-ready frontend boilerplate built on top of Next.js, shipped with:
 - TypeScript
 - SWR
-- TailwindCSS
+- Tailwind CSS
 - Jest
 - testing-library
 - Cypress
@@ -81,15 +81,15 @@ export default function Resume() {
 
   return (
     <Layout>
-      <div className="prose prose-sm grid max-w-none grid-cols-7 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2">
-        <div className="col-span-2 bg-slate-600 p-12 text-gray-100 prose-headings:text-white prose-a:text-white">
+      <div className="prose prose-sm grid max-w-none grid-cols-10 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2">
+        <div className="col-span-3 bg-slate-600 p-12 text-gray-100 prose-headings:text-white prose-a:text-white">
           <ResumeInfo resume={data} />
           <Divider />
           <ResumeSkills resume={data} />
           <Divider />
           <ResumeLanguages resume={data} />
         </div>
-        <div className="col-span-5 p-12">
+        <div className="col-span-7 p-12">
           <ResumeIntro resume={data} />
           <Divider />
           <ResumeExperience resume={data} />

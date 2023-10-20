@@ -12,8 +12,11 @@ module.exports = {
     extend: {
       fontFamily: {
         ...theme.fontFamily,
-        sans: ['var(--font-raleway)', ...theme.fontFamily.sans],
-        serif: ['var(--font-libre-baskerville)', ...theme.fontFamily.serif],
+        sans: ['var(--font-raleway, sans-serif)', ...theme.fontFamily.sans],
+        serif: [
+          'var(--font-libre-baskerville, serif)',
+          ...theme.fontFamily.serif,
+        ],
       },
       colors: {
         pink: {

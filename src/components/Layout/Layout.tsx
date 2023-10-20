@@ -1,16 +1,23 @@
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import cx from 'classnames'
+
 import { IconHome } from 'components/icons/components/IconHome'
 import { IconLinkSolid } from 'components/icons/components/IconLinkSolid'
 import { IconPaperClip } from 'components/icons/components/IconPaperClip'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
 import { ROUTES } from 'constants/routes'
-import Link from 'next/link'
-import cx from 'classnames'
-import { useRouter } from 'next/router'
 import { WithChildren } from 'types/common'
 import { Logo } from 'components/Logo'
-import { Header } from 'components/Header'
 import { useAuthContext } from 'context/auth'
-import { useEffect, useState } from 'react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from 'components/DropdownMenu'
+import { IconLogout } from 'components/icons/components/IconLogout'
 
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
@@ -27,7 +34,7 @@ export const Layout = ({ children }: WithChildren) => {
   const { pathname } = useRouter()
   const [hydrated, setHydrated] = useState(false)
 
-  const { isLogin } = useAuthContext()
+  const { isLogin, logout, user } = useAuthContext()
   const { push } = useRouter()
 
   const resumePage = pathname.startsWith(ROUTES.RESUME)
@@ -45,10 +52,10 @@ export const Layout = ({ children }: WithChildren) => {
   }
 
   return (
-    <div className="flex h-full bg-gray-100">
+    <div className="flex min-h-screen bg-gray-100">
       {isLogin && (
         <>
-          <aside className="w-72 fixed left-0 top-0 bg-gray-800 min-h-screen p-4 flex justify-between flex-col">
+          <aside className="fixed top-0 left-0 flex h-full w-72 flex-col justify-between bg-gray-800 p-4">
             <div className="space-y-5">
               <Logo hasText />
               <nav className="space-y-1">
@@ -58,8 +65,8 @@ export const Layout = ({ children }: WithChildren) => {
                     <Link
                       key={name}
                       className={cx(
-                        'flex w-full p-2 space-x-3 rounded-md',
-                        'bg-transparent duration-200 transition-all',
+                        'flex w-full space-x-3 rounded-md p-2',
+                        'bg-transparent transition-all duration-200',
                         {
                           'bg-gray-900 text-gray-300': pathname === href,
                           'text-gray-400 hover:text-gray-100':
@@ -70,20 +77,33 @@ export const Layout = ({ children }: WithChildren) => {
                       rel={external ? 'noopener' : undefined}
                       target={external ? '_blank' : undefined}
                     >
-                      <Icon className="w-6 h-6" /> <span>{name}</span>
+                      <Icon className="h-6 w-6" /> <span>{name}</span>
                     </Link>
                   )
                 })}
               </nav>
             </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger
+                className="w-full cursor-pointer whitespace-nowrap rounded-md border border-transparent bg-gray-500 px-5 py-3 text-center text-sm font-medium leading-none text-white shadow-sm transition duration-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+                data-testid="profile-button"
+              >
+                {user || 'User'}
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-48">
+                <DropdownMenuItem data-testid="logout-button" onClick={logout}>
+                  <IconLogout className="mr-2 h-5 w-5" />
+                  <span>Log out</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </aside>
           <div className="w-72" />
         </>
       )}
       <main className="flex-1">
-        {isLogin && <Header />}
         <div className="px-8 py-16">
-          <div className="flex space-y-6 flex-col max-w-7xl w-full mx-auto">
+          <div className="mx-auto flex w-full max-w-7xl flex-col space-y-6">
             {children}
           </div>
         </div>
