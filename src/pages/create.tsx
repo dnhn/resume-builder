@@ -3,7 +3,9 @@ import { Card } from 'components/Card'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
 import { Layout } from 'components/Layout'
+import { ResumeExperience } from 'components/ResumeExperience'
 import {
+  ExperienceForm,
   InfoForm,
   IntroForm,
   LanguagesForm,
@@ -15,18 +17,20 @@ import { ResumeLanguages } from 'components/ResumeLanguages'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
 import { useState } from 'react'
-import { IResumeInfo, IResumeLanguage } from 'types/resume'
+import { IResumeExperience, IResumeInfo, IResumeLanguage } from 'types/resume'
 
 const FormsPage = () => {
   const [info, setInfo] = useState<IResumeInfo>({ name: '' })
   const [skills, setSkills] = useState<string[]>([])
   const [languages, setLanguages] = useState<IResumeLanguage[]>([])
   const [intro, setIntro] = useState('')
+  const [experience, setExperience] = useState<IResumeExperience[]>([])
 
   const [infoEdit, setInfoEdit] = useState(true)
   const [skillsEdit, setSkillsEdit] = useState(true)
   const [languagesEdit, setLanguagesEdit] = useState(true)
   const [introEdit, setIntroEdit] = useState(true)
+  const [experienceEdit, setExperienceEdit] = useState(true)
 
   return (
     <Layout>
@@ -121,6 +125,28 @@ const FormsPage = () => {
                   size="sm"
                   type="button"
                   onClick={() => setIntroEdit((value) => !value)}
+                >
+                  <IconPencilSolid />
+                </Button>
+              </span>
+            </div>
+          )}
+          <Divider />
+          {experienceEdit ? (
+            <ExperienceForm
+              data={experience}
+              handleSave={setExperience}
+              onComplete={() => setExperienceEdit(false)}
+            />
+          ) : (
+            <div className="relative">
+              <ResumeExperience experience={experience} />
+              <span className="absolute top-0 right-0">
+                <Button
+                  appearance="secondary"
+                  size="sm"
+                  type="button"
+                  onClick={() => setExperienceEdit((value) => !value)}
                 >
                   <IconPencilSolid />
                 </Button>

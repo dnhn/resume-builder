@@ -23,7 +23,7 @@ export default function Resume() {
       {
         title: 'Front-end Developer',
         company: 'Dwarves Foundation',
-        startDate: new Date('2020-01-01'),
+        startDate: '2020-01-01',
         description: `Nobis eum provident reprehenderit, quasi nesciunt aperiam natus quis eaque unde saepe aliquam nulla. Eos neque fugit officia assumenda repellendus exercitationem sed.
 - list item 1
 - list item 2
@@ -96,7 +96,7 @@ export default function Resume() {
         <div className="col-span-7 p-12">
           {data.intro && <ResumeIntro intro={data.intro} />}
           <Divider />
-          <ResumeExperience resume={data} />
+          <ResumeExperience experience={data.experience} />
           <Divider />
           <ResumeProjects resume={data} />
           <Divider />

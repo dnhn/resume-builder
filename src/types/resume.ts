@@ -12,8 +12,8 @@ export interface IResumeInfo {
 export interface IResumeExperience {
   title: string
   company: string
-  startDate: Date
-  endDate?: Date
+  startDate: string
+  endDate?: string
   description?: string
 }
 

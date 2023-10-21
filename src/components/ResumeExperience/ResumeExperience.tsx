@@ -1,12 +1,12 @@
-import { IResume } from 'types/resume'
+import { IResumeExperience } from 'types/resume'
 import { ResumeHeading } from 'components/ResumeHeading'
 import { ResumeSection } from 'components/ResumeSection'
 import { ResumeExperienceEntry } from './ResumeExperienceEntry'
 
 export const ResumeExperience = ({
-  resume: { experience },
+  experience,
 }: {
-  resume: IResume
+  experience: IResumeExperience[]
 }) => {
   return (
     <ResumeSection>
