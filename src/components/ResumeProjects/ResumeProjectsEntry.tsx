@@ -6,21 +6,21 @@ import { Box } from 'components/Box'
 import { ResumeHeading } from 'components/ResumeHeading'
 
 export const ResumeProjectsEntry = ({ data }: { data: IResumeProject }) => {
-  const { name, link, description } = data
+  const { description, name, url } = data
 
   return (
     <Box>
       <ResumeHeading as="h3" className="mb-1 mt-6">
         {name}
       </ResumeHeading>
-      {link && (
+      {url && (
         <Link
           className="text-xs"
-          href={link}
+          href={url}
           rel="noopener noreferrer"
           target="_blank"
         >
-          {link}
+          {url}
         </Link>
       )}
       {description && <Markdown className="font-serif">{description}</Markdown>}

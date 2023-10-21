@@ -9,15 +9,22 @@ import {
   InfoForm,
   IntroForm,
   LanguagesForm,
+  ProjectsForm,
   SkillsForm,
 } from 'components/ResumeForm'
 import { ResumeInfo } from 'components/ResumeInfo'
 import { ResumeIntro } from 'components/ResumeIntro'
 import { ResumeLanguages } from 'components/ResumeLanguages'
+import { ResumeProjects } from 'components/ResumeProjects'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
 import { useState } from 'react'
-import { IResumeExperience, IResumeInfo, IResumeLanguage } from 'types/resume'
+import {
+  IResumeExperience,
+  IResumeInfo,
+  IResumeLanguage,
+  IResumeProject,
+} from 'types/resume'
 
 const FormsPage = () => {
   const [info, setInfo] = useState<IResumeInfo>({ name: '' })
@@ -25,12 +32,14 @@ const FormsPage = () => {
   const [languages, setLanguages] = useState<IResumeLanguage[]>([])
   const [intro, setIntro] = useState('')
   const [experience, setExperience] = useState<IResumeExperience[]>([])
+  const [projects, setProjects] = useState<IResumeProject[]>([])
 
   const [infoEdit, setInfoEdit] = useState(true)
   const [skillsEdit, setSkillsEdit] = useState(true)
   const [languagesEdit, setLanguagesEdit] = useState(true)
   const [introEdit, setIntroEdit] = useState(true)
   const [experienceEdit, setExperienceEdit] = useState(true)
+  const [projectsEdit, setProjectsEdit] = useState(true)
 
   return (
     <Layout>
@@ -147,6 +156,28 @@ const FormsPage = () => {
                   size="sm"
                   type="button"
                   onClick={() => setExperienceEdit((value) => !value)}
+                >
+                  <IconPencilSolid />
+                </Button>
+              </span>
+            </div>
+          )}
+          <Divider />
+          {projectsEdit ? (
+            <ProjectsForm
+              data={projects}
+              handleSave={setProjects}
+              onComplete={() => setProjectsEdit(false)}
+            />
+          ) : (
+            <div className="relative">
+              <ResumeProjects projects={projects} />
+              <span className="absolute top-0 right-0">
+                <Button
+                  appearance="secondary"
+                  size="sm"
+                  type="button"
+                  onClick={() => setProjectsEdit((value) => !value)}
                 >
                   <IconPencilSolid />
                 </Button>

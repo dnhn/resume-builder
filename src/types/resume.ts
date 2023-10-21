@@ -19,7 +19,7 @@ export interface IResumeExperience {
 
 export interface IResumeProject {
   name: string
-  link?: string
+  url?: string
   description?: string
 }
 

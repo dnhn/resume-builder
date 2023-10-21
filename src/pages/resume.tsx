@@ -33,12 +33,12 @@ export default function Resume() {
     projects: [
       {
         name: 'DF Front-end 2023',
-        link: 'https://github.com/dwarvesf/df-frontend-2023',
+        url: 'https://github.com/dwarvesf/df-frontend-2023',
         description: `Welcome to the Frontend Training 2023 repository! This is where you'll find exercises and templates meant to guide you through 8 training sessions on frontend development organized by Dwarves Foundation.`,
       },
       {
         name: 'Next.js Boilerplate',
-        link: 'https://github.com/dwarvesf/nextjs-boilerplate',
+        url: 'https://github.com/dwarvesf/nextjs-boilerplate',
         description: `An opinionated production-ready frontend boilerplate built on top of Next.js, shipped with:
 - TypeScript
 - SWR
@@ -98,7 +98,7 @@ export default function Resume() {
           <Divider />
           <ResumeExperience experience={data.experience} />
           <Divider />
-          <ResumeProjects resume={data} />
+          {data.projects && <ResumeProjects projects={data.projects} />}
           <Divider />
           <ResumeEducation resume={data} />
         </div>
