@@ -55,7 +55,12 @@ export function createFormElement<TFromElement, TNonNativeOnChange = any>(
         setValue,
       } = useFormContext()
 
-      const isError = Boolean(errors[name])
+      const nameProps = name.split('.')
+
+      const isError = Boolean(
+        errors[name] ||
+          (errors[nameProps[0]] as any)?.[nameProps[1]]?.[nameProps[2]],
+      )
 
       return (
         <div className={containerClassName}>
@@ -87,7 +92,11 @@ export function createFormElement<TFromElement, TNonNativeOnChange = any>(
 
           {isError ? (
             <FormErrorInfoMessage>
-              {errors[name]?.message as string}
+              {errors[name]?.message
+                ? (errors[name]?.message as string)
+                : ((errors?.[nameProps[0]] as any)?.[nameProps[1]]?.[
+                    nameProps[2]
+                  ]?.message as string)}
             </FormErrorInfoMessage>
           ) : null}
 
