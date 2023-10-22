@@ -4,13 +4,13 @@ import { IResumeInfo } from 'types/resume'
 import { ResumeHeading } from 'components/ResumeHeading'
 import { ResumeSection } from 'components/ResumeSection'
 
-export const ResumeInfo = ({ resume }: { resume: IResumeInfo }) => {
-  const { name, address, email, phoneNumber, title, website } = resume
+export const ResumeInfo = ({ info }: { info: IResumeInfo }) => {
+  const { name, address, email, phoneNumber, title, website } = info
   const externalUrl = website?.startsWith('http')
 
   return (
     <ResumeSection className="text-center">
-      <ResumeHeading as="h1" className="mt-0 mb-4">
+      <ResumeHeading as="h1" className="mt-0 mb-4 capitalize">
         {name}
       </ResumeHeading>
       {title && <div className="mb-8 text-xl font-medium">{title}</div>}

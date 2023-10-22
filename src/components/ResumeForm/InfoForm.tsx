@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput } from 'components/FormInput'
-import { Dispatch, SetStateAction } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { IResumeInfo } from 'types/resume'
 import { z } from 'zod'
@@ -12,7 +11,13 @@ const infoSchema = z.object({
   address: z.string().trim(),
   phoneNumber: z.string().trim(),
   email: z.string().trim(),
-  website: z.string().trim(),
+  website: z
+    .string()
+    .trim()
+    .refine(
+      (value) => (value.length ? value.startsWith('http') : true),
+      'URL is invalid.',
+    ),
 })
 
 type InfoSchema = z.infer<typeof infoSchema>
@@ -23,7 +28,7 @@ export function InfoForm({
   onComplete,
 }: {
   data: IResumeInfo
-  handleSave: Dispatch<SetStateAction<IResumeInfo>>
+  handleSave: (info: IResumeInfo) => void
   onComplete: VoidFunction
 }) {
   const form = useForm<InfoSchema>({

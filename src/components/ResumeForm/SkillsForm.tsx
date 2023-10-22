@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput } from 'components/FormInput'
 import { Text } from 'components/Text'
-import { Dispatch, SetStateAction } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -18,7 +17,7 @@ export function SkillsForm({
   onComplete,
 }: {
   data: string[]
-  handleSave: Dispatch<SetStateAction<string[]>>
+  handleSave: (skills: string[]) => void
   onComplete: VoidFunction
 }) {
   const form = useForm<SkillsSchema>({

@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput, FormTextarea } from 'components/FormInput'
 import { Text } from 'components/Text'
-import { Dispatch, SetStateAction } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -46,7 +45,7 @@ export function ExperienceForm({
   onComplete,
 }: {
   data: IResumeExperience[]
-  handleSave: Dispatch<SetStateAction<IResumeExperience[]>>
+  handleSave: (experience: IResumeExperience[]) => void
   onComplete: VoidFunction
 }) {
   const form = useForm<ExperienceSchema>({
@@ -73,6 +72,7 @@ export function ExperienceForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
           <Button
+            appearance="secondary"
             type="button"
             onClick={() =>
               append({
@@ -125,7 +125,11 @@ export function ExperienceForm({
                 />
                 <Text as="small">Markdown syntax supported</Text>
               </div>
-              <Button type="reset" onClick={() => remove(index)}>
+              <Button
+                appearance="secondary"
+                type="reset"
+                onClick={() => remove(index)}
+              >
                 Remove
               </Button>
             </div>

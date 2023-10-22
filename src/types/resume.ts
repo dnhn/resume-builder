@@ -38,11 +38,12 @@ export interface IResumeLanguage {
   proficiency?: string
 }
 
-export interface IResume extends IResumeInfo {
+export interface IResume {
+  info: IResumeInfo
   intro: string
   experience: IResumeExperience[]
-  projects?: IResumeProject[]
-  education?: IResumeEducation[]
-  skills?: string[]
-  languages?: IResumeLanguage[]
+  projects: IResumeProject[]
+  education: IResumeEducation[]
+  skills: string[]
+  languages: IResumeLanguage[]
 }

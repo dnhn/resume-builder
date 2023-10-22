@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput, FormTextarea } from 'components/FormInput'
 import { Text } from 'components/Text'
-import { Dispatch, SetStateAction } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -36,7 +35,7 @@ export function ProjectsForm({
   onComplete,
 }: {
   data: IResumeProject[]
-  handleSave: Dispatch<SetStateAction<IResumeProject[]>>
+  handleSave: (projects: IResumeProject[]) => void
   onComplete: VoidFunction
 }) {
   const form = useForm<ProjectsSchema>({
@@ -63,6 +62,7 @@ export function ProjectsForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
           <Button
+            appearance="secondary"
             type="button"
             onClick={() =>
               append({
@@ -97,7 +97,11 @@ export function ProjectsForm({
                 />
                 <Text as="small">Markdown syntax supported</Text>
               </div>
-              <Button type="reset" onClick={() => remove(index)}>
+              <Button
+                appearance="secondary"
+                type="reset"
+                onClick={() => remove(index)}
+              >
                 Remove
               </Button>
             </div>

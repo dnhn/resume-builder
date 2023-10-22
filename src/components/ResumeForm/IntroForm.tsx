@@ -1,7 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormTextarea } from 'components/FormInput'
-import { Dispatch, SetStateAction } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -17,7 +16,7 @@ export function IntroForm({
   onComplete,
 }: {
   data: string
-  handleSave: Dispatch<SetStateAction<string>>
+  handleSave: (intro: string) => void
   onComplete: VoidFunction
 }) {
   const form = useForm<IntroSchema>({

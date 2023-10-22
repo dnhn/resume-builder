@@ -4,7 +4,6 @@ import { Checkbox } from 'components/Checkbox'
 import { FormCheckboxGroup } from 'components/FormCheckboxGroup'
 import { FormInput, FormTextarea } from 'components/FormInput'
 import { Text } from 'components/Text'
-import { Dispatch, SetStateAction } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -26,8 +25,8 @@ const educationSchema = z.object({
         current: z.array(z.string()),
         description: z.string().trim(),
       })
-      .superRefine(({ startDate, endDate }, ctx) => {
-        if (startDate && endDate) {
+      .superRefine(({ current, startDate, endDate }, ctx) => {
+        if (current.length === 0 && startDate && endDate) {
           if (new Date(endDate) < new Date(startDate)) {
             ctx.addIssue({
               code: z.ZodIssueCode.invalid_date,
@@ -50,7 +49,7 @@ export function EducationForm({
   onComplete,
 }: {
   data: IResumeEducation[]
-  handleSave: Dispatch<SetStateAction<IResumeEducation[]>>
+  handleSave: (education: IResumeEducation[]) => void
   onComplete: VoidFunction
 }) {
   const form = useForm<EducationSchema>({
@@ -79,6 +78,7 @@ export function EducationForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
           <Button
+            appearance="secondary"
             type="button"
             onClick={() =>
               append({
@@ -145,7 +145,11 @@ export function EducationForm({
                 />
                 <Text as="small">Markdown syntax supported</Text>
               </div>
-              <Button type="reset" onClick={() => remove(index)}>
+              <Button
+                appearance="secondary"
+                type="reset"
+                onClick={() => remove(index)}
+              >
                 Remove
               </Button>
             </div>

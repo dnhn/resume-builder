@@ -21,7 +21,7 @@ import { IconLogout } from 'components/icons/components/IconLogout'
 
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
-  { name: 'Create', href: ROUTES.CREATE, Icon: IconPencilSolid },
+  { name: 'Edit', href: ROUTES.EDIT, Icon: IconPencilSolid },
   { name: 'Résumé', href: ROUTES.RESUME, Icon: IconPaperClip },
   {
     name: 'GitHub',

@@ -2,7 +2,6 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput } from 'components/FormInput'
 import { FormSelect } from 'components/FormSelect'
-import { Dispatch, SetStateAction } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -31,7 +30,7 @@ export function LanguagesForm({
   onComplete,
 }: {
   data: IResumeLanguage[]
-  handleSave: Dispatch<SetStateAction<IResumeLanguage[]>>
+  handleSave: (languages: IResumeLanguage[]) => void
   onComplete: VoidFunction
 }) {
   const form = useForm<LanguagesSchema>({
@@ -58,6 +57,7 @@ export function LanguagesForm({
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
           <Button
+            appearance="secondary"
             type="button"
             onClick={() => append({ name: '', proficiency: '' })}
           >
@@ -84,7 +84,11 @@ export function LanguagesForm({
                   </option>
                 ))}
               </FormSelect>
-              <Button type="reset" onClick={() => remove(index)}>
+              <Button
+                appearance="secondary"
+                type="reset"
+                onClick={() => remove(index)}
+              >
                 Remove
               </Button>
             </div>
