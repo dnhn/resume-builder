@@ -21,8 +21,8 @@ export const Logo = (props: LogoProps) => {
         </g>
       </svg>
       {hasText && (
-        <div className="text-white text-2xl tracking-wide ml-3 font-semibold">
-          Résumé
+        <div className="ml-3 text-2xl font-semibold tracking-wide text-white">
+          Résumé Builder
         </div>
       )}
     </div>

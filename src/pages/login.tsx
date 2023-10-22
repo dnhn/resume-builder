@@ -24,13 +24,10 @@ const loginFormDefaultValues = {
   password: process.env.NEXT_PUBLIC_PASSWORD ?? '',
 }
 const validationSchema = z.object({
-  username: z.string(),
+  username: z.string().trim(),
   password: z
     .string()
     .min(8, 'Password must be at least 8 characters long')
-    // .regex(/[A-Z]/, {
-    //   message: 'Password must contain at least 1 uppercase letter',
-    // })
     .regex(/\d/, {
       message: 'Password must contain at least 1 numeric digit',
     }),

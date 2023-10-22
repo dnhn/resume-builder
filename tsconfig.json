@@ -9,6 +9,7 @@
     "allowJs": true,
     "noEmit": true,
     "strict": true,
+    "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
     "noUnusedLocals": true,
