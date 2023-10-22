@@ -6,7 +6,8 @@ import { dateToMonthYear } from 'utils/formatDate'
 import { ResumeHeading } from 'components/ResumeHeading'
 
 export const ResumeEducationEntry = ({ data }: { data: IResumeEducation }) => {
-  const { school, degree, field, startDate, endDate, description } = data
+  const { school, degree, field, startDate, endDate, current, description } =
+    data
 
   return (
     <Box>
@@ -14,13 +15,19 @@ export const ResumeEducationEntry = ({ data }: { data: IResumeEducation }) => {
         {school}
       </ResumeHeading>
       <ResumeHeading as="h4">
-        {degree}, {field}
+        {degree}
+        {degree && field ? ',' : ''} {field}
       </ResumeHeading>
-      <ResumeHeading as="h5" className="mt-2">
-        {startDate && dateToMonthYear(startDate)}
-        {startDate && endDate && '–'}
-        {endDate ? dateToMonthYear(endDate) : 'present'}
-      </ResumeHeading>
+      {startDate && (
+        <ResumeHeading as="h5" className="mt-2">
+          {startDate && dateToMonthYear(startDate as unknown as Date)}
+          {startDate && (endDate || !!current.length) && '–'}
+          {current.length === 0 &&
+            endDate &&
+            dateToMonthYear(endDate as unknown as Date)}
+          {!!current.length && 'present'}
+        </ResumeHeading>
+      )}
       {description && <Markdown className="font-serif">{description}</Markdown>}
     </Box>
   )

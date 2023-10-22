@@ -1,3 +1,4 @@
+export * from './EducationForm'
 export * from './ExperienceForm'
 export * from './InfoForm'
 export * from './IntroForm'

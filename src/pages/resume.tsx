@@ -54,8 +54,9 @@ export default function Resume() {
         school: 'University of Science',
         field: 'Computer Science',
         degree: 'Bachelor’s Degree',
-        startDate: new Date('2016-08-01'),
-        endDate: new Date('2020-10-01'),
+        startDate: '2016-08-01',
+        endDate: '2020-10-01',
+        current: [],
         description: `A fugiat quasi saepe beatae? Eligendi vero consectetur reprehenderit voluptatem aut sed iusto, harum quae soluta temporibus repudiandae consequatur vitae nam obcaecati.
 - list item 1
 - list item 2
@@ -100,7 +101,7 @@ export default function Resume() {
           <Divider />
           {data.projects && <ResumeProjects projects={data.projects} />}
           <Divider />
-          <ResumeEducation resume={data} />
+          {data.education && <ResumeEducation education={data.education} />}
         </div>
       </div>
     </Layout>

@@ -3,8 +3,10 @@ import { Card } from 'components/Card'
 import { Divider } from 'components/Divider'
 import { Heading } from 'components/Heading'
 import { Layout } from 'components/Layout'
+import { ResumeEducation } from 'components/ResumeEducation'
 import { ResumeExperience } from 'components/ResumeExperience'
 import {
+  EducationForm,
   ExperienceForm,
   InfoForm,
   IntroForm,
@@ -20,6 +22,7 @@ import { ResumeSkills } from 'components/ResumeSkills'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
 import { useState } from 'react'
 import {
+  IResumeEducation,
   IResumeExperience,
   IResumeInfo,
   IResumeLanguage,
@@ -33,6 +36,7 @@ const FormsPage = () => {
   const [intro, setIntro] = useState('')
   const [experience, setExperience] = useState<IResumeExperience[]>([])
   const [projects, setProjects] = useState<IResumeProject[]>([])
+  const [education, setEducation] = useState<IResumeEducation[]>([])
 
   const [infoEdit, setInfoEdit] = useState(true)
   const [skillsEdit, setSkillsEdit] = useState(true)
@@ -40,6 +44,7 @@ const FormsPage = () => {
   const [introEdit, setIntroEdit] = useState(true)
   const [experienceEdit, setExperienceEdit] = useState(true)
   const [projectsEdit, setProjectsEdit] = useState(true)
+  const [educationEdit, setEducationEdit] = useState(true)
 
   return (
     <Layout>
@@ -178,6 +183,28 @@ const FormsPage = () => {
                   size="sm"
                   type="button"
                   onClick={() => setProjectsEdit((value) => !value)}
+                >
+                  <IconPencilSolid />
+                </Button>
+              </span>
+            </div>
+          )}
+          <Divider />
+          {educationEdit ? (
+            <EducationForm
+              data={education}
+              handleSave={setEducation}
+              onComplete={() => setEducationEdit(false)}
+            />
+          ) : (
+            <div className="relative">
+              <ResumeEducation education={education} />
+              <span className="absolute top-0 right-0">
+                <Button
+                  appearance="secondary"
+                  size="sm"
+                  type="button"
+                  onClick={() => setEducationEdit((value) => !value)}
                 >
                   <IconPencilSolid />
                 </Button>

@@ -27,8 +27,9 @@ export interface IResumeEducation {
   school: string
   degree?: string
   field?: string
-  startDate?: Date
-  endDate?: Date
+  startDate?: string
+  endDate?: string
+  current: string[]
   description?: string
 }
 
