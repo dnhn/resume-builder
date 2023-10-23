@@ -64,6 +64,7 @@ const EditPage = () => {
     projects: false,
     education: false,
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     if (apiData) {
@@ -89,6 +90,7 @@ const EditPage = () => {
   const handleSubmit = useCallback(async () => {
     if (isValid) {
       try {
+        setIsSubmitting(true)
         await axios.post(API_ROUTES.UPDATE_RESUME(user), {
           info: data.info,
           skills: data.skills,
@@ -108,6 +110,8 @@ const EditPage = () => {
           title: 'Error',
           message: 'Failed to update résumé.',
         })
+      } finally {
+        setIsSubmitting(false)
       }
     }
   }, [data, isValid, mutate, user])
@@ -118,8 +122,8 @@ const EditPage = () => {
         Edit your résumé
       </Heading>
 
-      <div className="prose prose-sm grid max-w-none grid-cols-10 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2">
-        <div className="col-span-3 bg-slate-600 p-6 text-gray-100 prose-headings:text-white prose-a:text-white xl:p-12">
+      <div className="prose prose-sm max-w-none grid-cols-3 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2 lg:grid">
+        <div className="col-span-1 bg-slate-600 p-8 text-gray-100 prose-headings:text-white prose-a:text-white lg:p-12">
           {edit.info ? (
             <Card>
               <InfoForm
@@ -199,7 +203,7 @@ const EditPage = () => {
             </div>
           )}
         </div>
-        <div className="col-span-7 p-6 xl:p-12">
+        <div className="-order-1 col-span-2 p-8 lg:p-12">
           {edit.intro ? (
             <IntroForm
               data={data.intro}
@@ -309,6 +313,7 @@ const EditPage = () => {
             <Button
               appearance="primary"
               disabled={!isValid}
+              loading={isSubmitting}
               size="lg"
               type="button"
               onClick={handleSubmit}

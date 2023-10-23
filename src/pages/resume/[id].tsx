@@ -28,7 +28,7 @@ export default function ResumePage() {
 
   return (
     <Layout>
-      <div className="prose prose-sm grid max-w-none grid-cols-10 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2">
+      <div className="prose prose-sm max-w-none grid-cols-3 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2 lg:grid">
         {isLoading && (
           <div className="col-span-10 p-12">
             <Heading as="h3" className="m-0 text-center">
@@ -38,7 +38,7 @@ export default function ResumePage() {
         )}
         {data && (
           <>
-            <div className="col-span-3 bg-slate-600 p-12 text-gray-100 prose-headings:text-white prose-a:text-white">
+            <div className="col-span-1 bg-slate-600 p-8 text-gray-100 prose-headings:text-white prose-a:text-white lg:p-12">
               <ResumeInfo info={data.info} />
               <Divider />
               {data.skills.length ? (
@@ -49,7 +49,7 @@ export default function ResumePage() {
                 <ResumeLanguages languages={data.languages} />
               ) : null}
             </div>
-            <div className="col-span-7 p-12">
+            <div className="-order-1 col-span-2 p-8 lg:p-12">
               {data.intro && <ResumeIntro intro={data.intro} />}
               <Divider />
               <ResumeExperience experience={data.experience} />

@@ -65,25 +65,27 @@ export function LanguagesForm({
           </Button>
           {fields.map((field, index) => (
             <div key={field.id} className="space-y-4">
-              <FormInput
-                label="Language"
-                name={`languages.${index}.name`}
-                rules={{ required: 'Required' }}
-                fullWidth
-              />
-              <FormSelect
-                className="capitalize text-gray-900"
-                label="Proficiency"
-                name={`languages.${index}.proficiency`}
-              >
-                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                <option value="" />
-                {PROFICIENCY.map((prof) => (
-                  <option key={prof} value={prof}>
-                    {prof}
-                  </option>
-                ))}
-              </FormSelect>
+              <div className="grid grid-cols-2 gap-4">
+                <FormInput
+                  label="Language"
+                  name={`languages.${index}.name`}
+                  rules={{ required: 'Required' }}
+                  fullWidth
+                />
+                <FormSelect
+                  className="capitalize text-gray-900"
+                  label="Proficiency"
+                  name={`languages.${index}.proficiency`}
+                >
+                  {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                  <option value="" />
+                  {PROFICIENCY.map((prof) => (
+                    <option key={prof} value={prof}>
+                      {prof}
+                    </option>
+                  ))}
+                </FormSelect>
+              </div>
               <Button
                 appearance="secondary"
                 type="reset"

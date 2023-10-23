@@ -21,8 +21,8 @@ import { IconLogout } from 'components/icons/components/IconLogout'
 
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
-  { name: 'Edit', href: ROUTES.EDIT, Icon: IconPencilSolid },
   { name: 'Résumé', href: ROUTES.RESUME, Icon: IconPaperClip },
+  { name: 'Edit', href: ROUTES.EDIT, Icon: IconPencilSolid },
   {
     name: 'GitHub',
     href: 'https://github.com/dnhn/resume-builder',
@@ -55,7 +55,7 @@ export const Layout = ({ children }: WithChildren) => {
     <div className="flex min-h-screen bg-gray-100">
       {isLogin && (
         <>
-          <aside className="fixed top-0 left-0 flex h-full w-72 flex-col justify-between bg-gray-800 p-4">
+          <aside className="fixed top-0 left-0 flex h-full w-52 flex-col justify-between bg-gray-800 p-4 xl:w-72">
             <div className="space-y-5">
               <Logo hasText />
               <nav className="space-y-1">
@@ -95,7 +95,7 @@ export const Layout = ({ children }: WithChildren) => {
               >
                 {user || 'User'}
               </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuContent align="start" className="w-32">
                 <DropdownMenuItem data-testid="logout-button" onClick={logout}>
                   <IconLogout className="mr-2 h-5 w-5" />
                   <span>Log out</span>
@@ -103,7 +103,7 @@ export const Layout = ({ children }: WithChildren) => {
               </DropdownMenuContent>
             </DropdownMenu>
           </aside>
-          <div className="w-72" />
+          <div className="w-52 xl:w-72" />
         </>
       )}
       <main className="flex-1">

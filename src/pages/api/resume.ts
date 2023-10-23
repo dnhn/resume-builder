@@ -8,7 +8,7 @@ export default async function handler(
   if (request.method === 'POST') {
     const result = await kv.set(
       `resume:${request.query.id as string}`,
-      JSON.stringify(request.body),
+      request.body,
     )
 
     return result === 'OK'

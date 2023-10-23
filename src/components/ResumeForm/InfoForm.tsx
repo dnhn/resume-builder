@@ -54,17 +54,23 @@ export function InfoForm({
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <FormInput
-            label="Name"
-            name="name"
-            rules={{ required: 'Required' }}
-            fullWidth
-          />
-          <FormInput label="Title" name="title" fullWidth />
-          <FormInput label="Address" name="address" fullWidth />
-          <FormInput label="Phone number" name="phoneNumber" fullWidth />
-          <FormInput label="Email" name="email" fullWidth />
-          <FormInput label="Website" name="website" fullWidth />
+          <div className="grid grid-cols-2 gap-4">
+            <FormInput
+              label="Name"
+              name="name"
+              rules={{ required: 'Required' }}
+              fullWidth
+            />
+            <FormInput label="Title" name="title" fullWidth />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <FormInput label="Address" name="address" fullWidth />
+            <FormInput label="Phone number" name="phoneNumber" fullWidth />
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <FormInput label="Email" name="email" fullWidth />
+            <FormInput label="Website" name="website" fullWidth />
+          </div>
           <div className="space-x-2 text-right">
             <Button disabled={!data.name} type="button" onClick={onComplete}>
               Cancel
