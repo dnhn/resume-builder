@@ -68,9 +68,14 @@ export const Layout = ({ children }: WithChildren) => {
                         'flex w-full space-x-3 rounded-md p-2',
                         'bg-transparent transition-all duration-200',
                         {
-                          'bg-gray-900 text-gray-300': pathname === href,
+                          'bg-gray-900 text-gray-300':
+                            href === '/'
+                              ? pathname === href
+                              : pathname.startsWith(href),
                           'text-gray-400 hover:text-gray-100':
-                            pathname !== href,
+                            href === '/'
+                              ? pathname !== href
+                              : !pathname.startsWith(href),
                         },
                       )}
                       href={href}

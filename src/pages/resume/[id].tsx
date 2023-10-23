@@ -1,0 +1,79 @@
+import axios from 'axios'
+import { Divider } from 'components/Divider'
+import { Heading } from 'components/Heading'
+import { Layout } from 'components/Layout'
+import { ResumeEducation } from 'components/ResumeEducation'
+import { ResumeExperience } from 'components/ResumeExperience'
+import { ResumeInfo } from 'components/ResumeInfo'
+import { ResumeIntro } from 'components/ResumeIntro'
+import { ResumeLanguages } from 'components/ResumeLanguages'
+import { ResumeProjects } from 'components/ResumeProjects'
+import { ResumeSkills } from 'components/ResumeSkills'
+import { API_ROUTES } from 'constants/routes'
+import { useAuthContext } from 'context/auth'
+import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import { IResume } from 'types/resume'
+
+const fetcher = (url: string) =>
+  axios.get(url).then((response) => response.data)
+
+export default function ResumePage() {
+  const { query } = useRouter()
+  const { user } = useAuthContext()
+  const { data, error, isLoading } = useSWR<IResume>(
+    API_ROUTES.GET_RESUME(query.id as string),
+    fetcher,
+  )
+
+  return (
+    <Layout>
+      <div className="prose prose-sm grid max-w-none grid-cols-10 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2">
+        {isLoading && (
+          <div className="col-span-10 p-12">
+            <Heading as="h3" className="m-0 text-center">
+              Loading résumé…
+            </Heading>
+          </div>
+        )}
+        {data && (
+          <>
+            <div className="col-span-3 bg-slate-600 p-12 text-gray-100 prose-headings:text-white prose-a:text-white">
+              <ResumeInfo info={data.info} />
+              <Divider />
+              {data.skills.length ? (
+                <ResumeSkills skills={data.skills} />
+              ) : null}
+              <Divider />
+              {data.languages.length ? (
+                <ResumeLanguages languages={data.languages} />
+              ) : null}
+            </div>
+            <div className="col-span-7 p-12">
+              {data.intro && <ResumeIntro intro={data.intro} />}
+              <Divider />
+              <ResumeExperience experience={data.experience} />
+              <Divider />
+              {!!data.projects.length && (
+                <ResumeProjects projects={data.projects} />
+              )}
+              <Divider />
+              {!!data.education.length && (
+                <ResumeEducation education={data.education} />
+              )}
+            </div>
+          </>
+        )}
+        {!isLoading && error && (
+          <div className="col-span-10 p-12">
+            <Heading as="h3" className="m-0 text-center">
+              {query.id === user
+                ? 'Your résumé is currently empty, please add more content to view this page.'
+                : 'Résumé not found.'}
+            </Heading>
+          </div>
+        )}
+      </div>
+    </Layout>
+  )
+}

@@ -3,6 +3,7 @@ export const ROUTES = {
   DASHBOARD: '/',
   EDIT: '/edit',
   RESUME: '/resume',
+  RESUME_BY_ID: (id: string) => `/resume/${id}`,
 }
 
 export const API_ROUTES = {
