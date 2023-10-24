@@ -206,7 +206,7 @@ const EditPage = () => {
         <div className="-order-1 col-span-2 p-8 lg:p-12">
           {edit.intro ? (
             <IntroForm
-              data={data.intro}
+              data={data}
               handleSave={setIntro}
               onComplete={() => setEdit((edit) => ({ ...edit, intro: false }))}
             />

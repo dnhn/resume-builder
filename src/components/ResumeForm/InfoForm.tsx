@@ -61,7 +61,7 @@ export function InfoForm({
               rules={{ required: 'Required' }}
               fullWidth
             />
-            <FormInput label="Title" name="title" fullWidth />
+            <FormInput label="Job title" name="title" fullWidth />
           </div>
           <div className="grid grid-cols-2 gap-4">
             <FormInput label="Address" name="address" fullWidth />

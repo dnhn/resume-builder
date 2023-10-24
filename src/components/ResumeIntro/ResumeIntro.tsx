@@ -7,7 +7,7 @@ export const ResumeIntro = ({ intro }: { intro: string }) => {
     <ResumeSection>
       <ResumeHeading className="mt-0 mb-6">Introduction</ResumeHeading>
       <div className="prose prose-sm max-w-none prose-p:last:mb-0">
-        <Markdown>{intro}</Markdown>
+        <Markdown className="font-serif">{intro}</Markdown>
       </div>
     </ResumeSection>
   )

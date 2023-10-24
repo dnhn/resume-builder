@@ -61,7 +61,12 @@ export const Button = forwardRefWithAs<'button', ButtonProps>(
     }
 
     return (
-      <BaseButton ref={ref} {...props} className={cx(className, baseClassName)}>
+      <BaseButton
+        ref={ref}
+        {...props}
+        className={cx(className, baseClassName)}
+        disabled={props.disabled || loading}
+      >
         {children}
       </BaseButton>
     )

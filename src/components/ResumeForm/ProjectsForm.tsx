@@ -2,6 +2,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput, FormTextarea } from 'components/FormInput'
 import { Text } from 'components/Text'
+import { toast } from 'components/Toast'
+import { useCallback, useState } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -9,6 +11,7 @@ import {
   useForm,
 } from 'react-hook-form'
 import { IResumeProject } from 'types/resume'
+import { completeChat } from 'utils/completeChat'
 import { z } from 'zod'
 
 const projectsSchema = z.object({
@@ -38,6 +41,7 @@ export function ProjectsForm({
   handleSave: (projects: IResumeProject[]) => void
   onComplete: VoidFunction
 }) {
+  const [isLoading, setIsLoading] = useState<{ [key: string]: boolean }>({})
   const form = useForm<ProjectsSchema>({
     resolver: zodResolver(projectsSchema),
     defaultValues: {
@@ -45,7 +49,9 @@ export function ProjectsForm({
     },
   })
 
-  const { control, handleSubmit } = form
+  const { control, getValues, handleSubmit, setValue, watch } = form
+
+  watch()
 
   const { append, fields, remove } = useFieldArray({
     control,
@@ -56,6 +62,51 @@ export function ProjectsForm({
     handleSave(data.projects)
     onComplete()
   }
+
+  const appendContent = useCallback(
+    (field: any, content: string) =>
+      setValue(
+        field,
+        `${getValues(field)}\n\n---
+\nHere is your generated content:\n\n${content}`,
+      ),
+    [getValues, setValue],
+  )
+
+  const handleGenerateContent = useCallback(
+    async (index: number) => {
+      const name = getValues(`projects.${index}.name`)
+      const descriptionField = `projects.${index}.description`
+      const description = getValues(`projects.${index}.description`)
+
+      try {
+        setIsLoading((state) => ({
+          ...state,
+          [descriptionField]: true,
+        }))
+
+        const { choices } = await completeChat(
+          `${
+            description
+              ? `Refine the content below, project ${name}’s description:\n${description}`
+              : `Write a project description for project ${name}.`
+          }`,
+        )
+
+        appendContent(descriptionField, choices[0].message.content)
+      } catch (error) {
+        toast.error({
+          title: 'An error occurred.',
+        })
+      } finally {
+        setIsLoading((state) => ({
+          ...state,
+          [descriptionField]: false,
+        }))
+      }
+    },
+    [appendContent, getValues],
+  )
 
   return (
     <FormProvider {...form}>
@@ -90,11 +141,29 @@ export function ProjectsForm({
                 />
               </div>
               <div>
-                <FormTextarea
-                  label="Description"
-                  name={`projects.${index}.description`}
-                  fullWidth
-                />
+                <div className="relative">
+                  <FormTextarea
+                    label="Description"
+                    name={`projects.${index}.description`}
+                    rows={10}
+                    fullWidth
+                  />
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                    <Button
+                      appearance="primary"
+                      disabled={isLoading[`projects.${index}.description`]}
+                      loading={isLoading[`projects.${index}.description`]}
+                      size="sm"
+                      type="button"
+                      onClick={() => handleGenerateContent(index)}
+                    >
+                      {getValues(`projects.${index}.description`).length === 0
+                        ? 'Suggest'
+                        : 'Refine'}{' '}
+                      description
+                    </Button>
+                  </div>
+                </div>
                 <Text as="small">Markdown syntax supported</Text>
               </div>
               <Button

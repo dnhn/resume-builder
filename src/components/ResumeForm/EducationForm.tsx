@@ -4,6 +4,8 @@ import { Checkbox } from 'components/Checkbox'
 import { FormCheckboxGroup } from 'components/FormCheckboxGroup'
 import { FormInput, FormTextarea } from 'components/FormInput'
 import { Text } from 'components/Text'
+import { toast } from 'components/Toast'
+import { useCallback, useState } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -11,6 +13,7 @@ import {
   useForm,
 } from 'react-hook-form'
 import { IResumeEducation } from 'types/resume'
+import { completeChat } from 'utils/completeChat'
 import { z } from 'zod'
 
 const educationSchema = z.object({
@@ -52,6 +55,7 @@ export function EducationForm({
   handleSave: (education: IResumeEducation[]) => void
   onComplete: VoidFunction
 }) {
+  const [isLoading, setIsLoading] = useState<{ [key: string]: boolean }>({})
   const form = useForm<EducationSchema>({
     resolver: zodResolver(educationSchema),
     defaultValues: {
@@ -59,7 +63,7 @@ export function EducationForm({
     },
   })
 
-  const { control, getValues, handleSubmit, watch } = form
+  const { control, getValues, handleSubmit, setValue, watch } = form
 
   watch()
 
@@ -72,6 +76,51 @@ export function EducationForm({
     handleSave(data.education)
     onComplete()
   }
+
+  const appendContent = useCallback(
+    (field: any, content: string) =>
+      setValue(
+        field,
+        `${getValues(field)}\n\n---
+\nHere is your generated content:\n\n${content}`,
+      ),
+    [getValues, setValue],
+  )
+
+  const handleGenerateContent = useCallback(
+    async (index: number) => {
+      const degree = getValues(`education.${index}.degree`)
+      const field = getValues(`education.${index}.field`)
+      const descriptionField = `education.${index}.description`
+      const description = getValues(`education.${index}.description`)
+
+      try {
+        setIsLoading((state) => ({
+          ...state,
+          [descriptionField]: true,
+        }))
+
+        const { choices } = await completeChat(
+          `${
+            description ? 'Refine the content below,' : 'Write'
+          } a résumé education description of a ${degree} in ${field}:
+${description || `${degree} in ${field}`}`,
+        )
+
+        appendContent(descriptionField, choices[0].message.content)
+      } catch (error) {
+        toast.error({
+          title: 'An error occurred.',
+        })
+      } finally {
+        setIsLoading((state) => ({
+          ...state,
+          [descriptionField]: false,
+        }))
+      }
+    },
+    [appendContent, getValues],
+  )
 
   return (
     <FormProvider {...form}>
@@ -138,11 +187,30 @@ export function EducationForm({
                 )}
               </div>
               <div>
-                <FormTextarea
-                  label="Description"
-                  name={`education.${index}.description`}
-                  fullWidth
-                />
+                <div className="relative">
+                  <FormTextarea
+                    disabled={isLoading[`education.${index}.description`]}
+                    label="Description"
+                    name={`education.${index}.description`}
+                    rows={10}
+                    fullWidth
+                  />
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                    <Button
+                      appearance="primary"
+                      disabled={isLoading[`education.${index}.description`]}
+                      loading={isLoading[`education.${index}.description`]}
+                      size="sm"
+                      type="button"
+                      onClick={() => handleGenerateContent(index)}
+                    >
+                      {getValues(`education.${index}.description`).length === 0
+                        ? 'Suggest'
+                        : 'Refine'}{' '}
+                      description
+                    </Button>
+                  </div>
+                </div>
                 <Text as="small">Markdown syntax supported</Text>
               </div>
               <Button

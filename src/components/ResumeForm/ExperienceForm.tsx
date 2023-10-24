@@ -2,6 +2,8 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput, FormTextarea } from 'components/FormInput'
 import { Text } from 'components/Text'
+import { toast } from 'components/Toast'
+import { useCallback, useState } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -9,6 +11,7 @@ import {
   useForm,
 } from 'react-hook-form'
 import { IResumeExperience } from 'types/resume'
+import { completeChat } from 'utils/completeChat'
 import { z } from 'zod'
 
 const experienceSchema = z.object({
@@ -48,6 +51,7 @@ export function ExperienceForm({
   handleSave: (experience: IResumeExperience[]) => void
   onComplete: VoidFunction
 }) {
+  const [isLoading, setIsLoading] = useState<{ [key: string]: boolean }>({})
   const form = useForm<ExperienceSchema>({
     resolver: zodResolver(experienceSchema),
     defaultValues: {
@@ -55,7 +59,9 @@ export function ExperienceForm({
     },
   })
 
-  const { control, handleSubmit } = form
+  const { control, getValues, handleSubmit, setValue, watch } = form
+
+  watch()
 
   const { append, fields, remove } = useFieldArray({
     control,
@@ -66,6 +72,49 @@ export function ExperienceForm({
     handleSave(data.experience)
     onComplete()
   }
+
+  const appendContent = useCallback(
+    (field: any, content: string) =>
+      setValue(
+        field,
+        `${getValues(field)}\n\n---
+\nHere is your generated content:\n\n${content}`,
+      ),
+    [getValues, setValue],
+  )
+
+  const handleGenerateContent = useCallback(
+    async (index: number) => {
+      const title = getValues(`experience.${index}.title`)
+      const company = getValues(`experience.${index}.company`)
+      const descriptionField = `experience.${index}.description`
+      const description = getValues(`experience.${index}.description`)
+
+      try {
+        setIsLoading((state) => ({
+          ...state,
+          [descriptionField]: true,
+        }))
+
+        const { choices } = await completeChat(
+          `Refine the content below, a job experience description of a ${title}:
+${description || `${title} a ${company}`}`,
+        )
+
+        appendContent(descriptionField, choices[0].message.content)
+      } catch (error) {
+        toast.error({
+          title: 'An error occurred.',
+        })
+      } finally {
+        setIsLoading((state) => ({
+          ...state,
+          [descriptionField]: false,
+        }))
+      }
+    },
+    [appendContent, getValues],
+  )
 
   return (
     <FormProvider {...form}>
@@ -118,11 +167,30 @@ export function ExperienceForm({
                 />
               </div>
               <div>
-                <FormTextarea
-                  label="Description"
-                  name={`experience.${index}.description`}
-                  fullWidth
-                />
+                <div className="relative">
+                  <FormTextarea
+                    disabled={isLoading[`experience.${index}.description`]}
+                    label="Description"
+                    name={`experience.${index}.description`}
+                    rows={10}
+                    fullWidth
+                  />
+                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                    <Button
+                      appearance="primary"
+                      disabled={isLoading[`experience.${index}.description`]}
+                      loading={isLoading[`experience.${index}.description`]}
+                      size="sm"
+                      type="button"
+                      onClick={() => handleGenerateContent(index)}
+                    >
+                      {getValues(`experience.${index}.description`).length === 0
+                        ? 'Suggest'
+                        : 'Refine'}{' '}
+                      description
+                    </Button>
+                  </div>
+                </div>
                 <Text as="small">Markdown syntax supported</Text>
               </div>
               <Button
