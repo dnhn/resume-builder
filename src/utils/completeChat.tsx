@@ -16,3 +16,19 @@ export const completeChat = (prompt: string) =>
       },
     ],
   })
+
+export const completeQuote = () =>
+  getChatCompletions({
+    user: 'nhnd',
+    temperature: 1.2,
+    messages: [
+      {
+        role: 'system',
+        content: 'You motivate and inspire the others.',
+      },
+      {
+        role: 'user',
+        content: 'Provide me with a motivational or inspirational quote.',
+      },
+    ],
+  })

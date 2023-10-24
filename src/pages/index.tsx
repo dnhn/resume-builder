@@ -1,219 +1,69 @@
-import { Layout } from 'components/Layout'
-import { Heading } from 'components/Heading'
 import { Card } from 'components/Card'
-import { Text } from 'components/Text'
+import { Divider } from 'components/Divider'
+import { Heading } from 'components/Heading'
+import { Layout } from 'components/Layout'
+import { IconSpinner } from 'components/icons/components/IconSpinner'
+import { ROUTES } from 'constants/routes'
 import { useAuthContext } from 'context/auth'
-import { formatNumber } from 'utils/formatNumber'
-import { Badge } from 'components/Badge'
-import { IconArrowSmUp } from 'components/icons/components/IconArrowSmUp'
-import { IconArrowSmDown } from 'components/icons/components/IconArrowSmDown'
-import { IconPaperClip } from 'components/icons/components/IconPaperClip'
-
-interface StatCardProps {
-  title: string
-  from: number
-  to: number
-  suffix?: string
-}
-
-const StatCard = (props: StatCardProps) => {
-  const { title, suffix, from, to } = props
-  const isGrowth = to > from
-
-  return (
-    <Card>
-      <Heading as="h5" className="mb-1 !text-base !font-medium !text-gray-700">
-        {title}
-      </Heading>
-      <div className="flex items-end justify-between">
-        <div className="flex items-end space-x-2">
-          <Text as="span" className="text-2xl font-medium text-pink-500">
-            {formatNumber(to)}
-            {suffix}
-          </Text>
-          <Text as="span" className="mb-1 text-sm text-gray-500">
-            from {formatNumber(from)}
-            {suffix}
-          </Text>
-        </div>
-        <Badge className="pl-1" type={isGrowth ? 'success' : 'error'}>
-          {isGrowth ? (
-            <IconArrowSmUp className="h-5 w-5 text-green-500" />
-          ) : (
-            <IconArrowSmDown className="h-5 w-5 text-red-500" />
-          )}
-          20.2%
-        </Badge>
-      </div>
-    </Card>
-  )
-}
+import Link from 'next/link'
+import { useCallback, useEffect, useState } from 'react'
+import Markdown from 'react-markdown'
+import { completeQuote } from 'utils/completeChat'
 
 const DashboardPage = () => {
   const { user } = useAuthContext()
+  const [quote, setQuote] = useState('')
+  const getQuote = useCallback(async () => {
+    try {
+      const { choices } = await completeQuote()
+
+      setQuote(choices[0].message.content)
+    } catch (error) {} // eslint-disable-line no-empty
+  }, [])
+
+  useEffect(() => {
+    getQuote()
+  }, [getQuote])
 
   return (
     <Layout>
-      <div className="space-y-px">
-        <Heading as="h3">Good afternoon, {user}</Heading>
-        <Text className="text-gray-500">
-          Here's what's happenning with your ambassador account today.
-        </Text>
+      <div className="text-center">
+        <Heading as="h3">Hallo, {user}!</Heading>
       </div>
 
-      <div className="grid grid-cols-3 gap-6">
-        <StatCard from={70946} title="Total Subscribers" to={71897} />
-        <StatCard from={56.14} suffix="%" title="Avg. Open Rate" to={58.16} />
-        <StatCard from={28.62} suffix="%" title="Avg. Click Rate" to={24.57} />
-      </div>
-
-      <div className="grid grid-cols-3 gap-6">
-        <div className="col-span-2 space-y-5">
-          <Card className="overflow-hidden" spacing={false}>
-            <div className="px-6 py-5">
-              <Heading as="h5" className="mb-1 !font-medium !text-gray-700">
-                Applicant Information
-              </Heading>
-              <Text className="text-sm text-gray-400">
-                Personal details and application.
-              </Text>
-            </div>
-            <div className="border-t border-gray-200">
-              <dl>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    Full name
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    Margot Foster
-                  </dd>
-                </div>
-                <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    Application for
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    Backend Developer
-                  </dd>
-                </div>
-                <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    Email address
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    margotfoster@example.com
-                  </dd>
-                </div>
-                <div className="bg-white px-4 py-4 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                  <dt className="text-sm font-medium text-gray-500">
-                    Attachments
-                  </dt>
-                  <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                    <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                      <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                        <div className="flex w-0 flex-1 items-center">
-                          <IconPaperClip className="h-5 w-5 flex-shrink-0 text-gray-400" />
-                          <span className="ml-2 w-0 flex-1 truncate">
-                            resume_back_end_developer.pdf
-                          </span>
-                        </div>
-                        <div className="ml-4 flex-shrink-0">
-                          <a
-                            className="font-medium text-pink-600 hover:text-pink-500"
-                            href="#download"
-                          >
-                            Download
-                          </a>
-                        </div>
-                      </li>
-                      <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                        <div className="flex w-0 flex-1 items-center">
-                          <IconPaperClip className="h-5 w-5 flex-shrink-0 text-gray-400" />
-                          <span className="ml-2 w-0 flex-1 truncate">
-                            coverletter_back_end_developer.pdf
-                          </span>
-                        </div>
-                        <div className="ml-4 flex-shrink-0">
-                          <a
-                            className="font-medium text-pink-600 hover:text-pink-500"
-                            href="#download"
-                          >
-                            Download
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
-                  </dd>
-                </div>
-              </dl>
-            </div>
-          </Card>
+      <Card
+        className="mx-auto w-[40rem] max-w-full space-y-8 p-16 text-center shadow-lg"
+        spacing={false}
+      >
+        <div className="space-x-4">
+          <Link
+            className="inline-block rounded-md border border-transparent bg-gray-500 py-4 px-8 text-white shadow-sm hover:bg-gray-600 focus:ring-gray-400"
+            href={ROUTES.EDIT}
+          >
+            Edit your Résumé
+          </Link>
+          <Link
+            className="inline-block rounded-md border border-transparent bg-pink-600 py-4 px-8 text-white shadow-sm hover:bg-pink-700 focus:ring-pink-500"
+            href={ROUTES.RESUME}
+          >
+            View your Résumé
+          </Link>
         </div>
-        <div className="col-span-1 space-y-5">
-          <Card className="overflow-hidden" spacing={false}>
-            <div className="px-6 py-5">
-              <Heading as="h5" className="mb-1 !font-medium !text-gray-700">
-                Recent Sign-ups
-              </Heading>
-              <Text className="text-sm text-gray-400">
-                Recent customers onboarded.
-              </Text>
-            </div>
-            <div className="divide-y divide-gray-200 border-t border-gray-200">
-              {[
-                {
-                  name: 'Jane Cooper',
-                  avatar:
-                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-                  email: 'jane.cooper@example.com',
-                },
-                {
-                  name: 'Cody Fisher',
-                  avatar:
-                    'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-                  email: 'cody.fisher@example.com',
-                },
-                {
-                  name: 'Esther Howard',
-                  avatar:
-                    'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-                  email: 'esther.howard@example.com',
-                },
-                {
-                  name: 'Jenny Wilson',
-                  avatar:
-                    'https://images.unsplash.com/photo-1498551172505-8ee7ad69f235?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-                  email: 'jenny.wilson@example.com',
-                },
-                {
-                  name: 'Cameron Williamson',
-                  avatar:
-                    'https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-                  email: 'cameron.williamson@example.com',
-                },
-              ].map(({ avatar, email, name }) => (
-                <div key={name} className="px-6 py-2.5">
-                  <div className="flex items-center">
-                    <div className="h-10 w-10 flex-shrink-0">
-                      <img
-                        alt=""
-                        className="h-10 w-10 rounded-full"
-                        src={avatar}
-                      />
-                    </div>
-                    <div className="ml-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {name}
-                      </div>
-                      <div className="text-sm text-gray-500">{email}</div>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Card>
+        <Divider>Or browse our sample résumés</Divider>
+        <div className="space-x-4">
+          <Link href={ROUTES.RESUME_BY_ID('nhnd')}>@nhnd</Link>
+          <Link href={ROUTES.RESUME_BY_ID('dnhn')}>@dnhn</Link>
         </div>
-      </div>
+      </Card>
+      {quote ? (
+        <div className="prose prose-sm mx-auto w-[24rem] max-w-full text-center">
+          <Markdown className="font-serif italic">{quote}</Markdown>
+        </div>
+      ) : (
+        <div className="flex justify-center">
+          <IconSpinner />
+        </div>
+      )}
     </Layout>
   )
 }

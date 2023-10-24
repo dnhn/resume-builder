@@ -22,6 +22,7 @@ const fontSans = Raleway({
 const fontSerif = Libre_Baskerville({
   variable: '--font-libre-baskerville',
   weight: ['400', '700'],
+  style: ['normal', 'italic'],
   subsets: ['latin'],
 })
 
