@@ -1,7 +1,7 @@
 export const ROUTES = {
   LOGIN: '/login',
   DASHBOARD: '/',
-  EDIT: '/edit',
+  BUILD: '/build',
   RESUME: '/resume',
   RESUME_BY_ID: (id: string) => `/resume/${id}`,
 }

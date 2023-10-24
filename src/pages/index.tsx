@@ -38,9 +38,9 @@ const DashboardPage = () => {
         <div className="space-x-4">
           <Link
             className="inline-block rounded-md border border-transparent bg-gray-500 py-4 px-8 text-white shadow-sm hover:bg-gray-600 focus:ring-gray-400"
-            href={ROUTES.EDIT}
+            href={ROUTES.BUILD}
           >
-            Edit your Résumé
+            Build your Résumé
           </Link>
           <Link
             className="inline-block rounded-md border border-transparent bg-pink-600 py-4 px-8 text-white shadow-sm hover:bg-pink-700 focus:ring-pink-500"

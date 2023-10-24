@@ -22,7 +22,7 @@ import { IconLogout } from 'components/icons/components/IconLogout'
 const menuItems = [
   { name: 'Dashboard', href: ROUTES.DASHBOARD, Icon: IconHome },
   { name: 'Résumé', href: ROUTES.RESUME, Icon: IconPaperClip },
-  { name: 'Edit', href: ROUTES.EDIT, Icon: IconPencilSolid },
+  { name: 'Build', href: ROUTES.BUILD, Icon: IconPencilSolid },
   {
     name: 'GitHub',
     href: 'https://github.com/dnhn/resume-builder',

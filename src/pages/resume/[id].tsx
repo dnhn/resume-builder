@@ -11,6 +11,7 @@ import { ResumeProjects } from 'components/ResumeProjects'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { API_ROUTES } from 'constants/routes'
 import { useAuthContext } from 'context/auth'
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import { IResume } from 'types/resume'
@@ -28,6 +29,13 @@ export default function ResumePage() {
 
   return (
     <Layout>
+      <Head>
+        <title>
+          {data?.info.name
+            ? `${data.info.name} | Résumé Builder`
+            : 'Résumé Builder'}
+        </title>
+      </Head>
       <div className="prose prose-sm max-w-none grid-cols-3 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2 lg:grid">
         {isLoading && (
           <div className="col-span-10 p-12">

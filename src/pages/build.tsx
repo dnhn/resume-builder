@@ -34,6 +34,7 @@ import {
   IResumeProject,
 } from 'types/resume'
 import { toast } from 'components/Toast'
+import Head from 'next/head'
 
 const initialData = {
   info: { name: '' },
@@ -48,7 +49,7 @@ const initialData = {
 const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data)
 
-const EditPage = () => {
+const BuildPage = () => {
   const { user } = useAuthContext()
   const { data: apiData, mutate } = useSWR<IResume>(
     API_ROUTES.GET_RESUME(user),
@@ -118,8 +119,11 @@ const EditPage = () => {
 
   return (
     <Layout>
-      <Heading as="h2" className="text-center uppercase">
-        Edit your résumé
+      <Head>
+        <title>Build your Résumé</title>
+      </Head>
+      <Heading as="h2" className="text-center">
+        Build your Résumé
       </Heading>
 
       <div className="prose prose-sm max-w-none grid-cols-3 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2 lg:grid">
@@ -327,4 +331,4 @@ const EditPage = () => {
   )
 }
 
-export default EditPage
+export default BuildPage
