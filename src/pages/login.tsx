@@ -1,19 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import cx from 'classnames'
-import { Card } from 'components/Card'
-import { Heading } from 'components/Heading'
-import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import * as z from 'zod'
-import { FormInput } from 'components/FormInput'
+import cx from 'classnames'
 import { Button } from 'components/Button'
-import { useAuthContext } from 'context/auth'
-import { useRouter } from 'next/router'
-import { ROUTES } from 'constants/routes'
+import { Card } from 'components/Card'
+import { FormInput } from 'components/FormInput'
+import { Heading } from 'components/Heading'
 import { Logo } from 'components/Logo'
 import { toast } from 'components/Toast'
-
+import { ROUTES } from 'constants/routes'
+import { useAuthContext } from 'context/auth'
 import { Raleway } from 'next/font/google'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { useState, useEffect } from 'react'
+import { useForm, FormProvider } from 'react-hook-form'
+import { z } from 'zod'
 
 const fontFamily = Raleway({
   weight: ['400', '500'],
@@ -107,6 +107,14 @@ const LoginPage = () => {
           </form>
         </FormProvider>
       </Card>
+      <Link
+        className="font-bold"
+        href="https://github.com/dnhn/resume-builder"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        GitHub
+      </Link>
     </div>
   )
 }

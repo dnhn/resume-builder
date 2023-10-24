@@ -79,7 +79,7 @@ export const Layout = ({ children }: WithChildren) => {
                         },
                       )}
                       href={href}
-                      rel={external ? 'noopener' : undefined}
+                      rel={external ? 'noopener noreferrer' : undefined}
                       target={external ? '_blank' : undefined}
                     >
                       <Icon className="h-6 w-6" /> <span>{name}</span>
