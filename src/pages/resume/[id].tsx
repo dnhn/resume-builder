@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { Card } from 'components/Card'
 import { Divider } from 'components/Divider'
-import { Heading } from 'components/Heading'
 import { Layout } from 'components/Layout'
 import { ResumeEducation } from 'components/ResumeEducation'
 import { ResumeExperience } from 'components/ResumeExperience'
@@ -41,9 +40,9 @@ export default function ResumePage() {
       <div className="prose prose-sm max-w-none grid-cols-3 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2 lg:grid">
         {isLoading && (
           <div className="col-span-3 p-12">
-            <Heading as="h3" className="m-0 text-center">
-              Loading résumé…
-            </Heading>
+            <div className="text-center text-3xl font-medium leading-normal">
+              Loading {query.id === user ? 'your' : ''} résumé…
+            </div>
           </div>
         )}
         {data && (
@@ -99,11 +98,11 @@ export default function ResumePage() {
         )}
         {!isLoading && error && (
           <div className="col-span-3 p-12">
-            <Heading as="h3" className="m-0 text-center">
+            <div className="mx-auto max-w-xl text-center text-3xl font-medium leading-normal">
               {query.id === user
-                ? 'Your résumé is currently empty, please add more content to view this page.'
+                ? 'Nothing’s here… please add more content to your résumé.'
                 : 'Résumé not found.'}
-            </Heading>
+            </div>
           </div>
         )}
       </div>
