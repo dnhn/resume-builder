@@ -8,11 +8,6 @@ import cx from 'classnames'
 import { AuthContextProvider } from 'context/auth'
 import { Toaster } from 'components/Toast'
 
-if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-  // eslint-disable-next-line global-require
-  require('mocks')
-}
-
 const fontSans = Raleway({
   variable: '--font-sans-custom',
   weight: ['400', '500', '600', '700'],
