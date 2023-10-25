@@ -102,10 +102,9 @@ export function EducationForm({
         }))
 
         const { choices } = await completeChat(
-          `${
-            description ? 'Refine the content below,' : 'Write'
-          } a résumé education description of a ${degree} in ${field}:
-${description || `${degree} in ${field}`}`,
+          `Write an education description in the résumé of a ${degree} in ${field} ${
+            description ? `by refining the content below:\n${description}` : '.'
+          }`,
         )
 
         appendContent(descriptionField, choices[0].message.content)

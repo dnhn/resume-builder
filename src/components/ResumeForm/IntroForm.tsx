@@ -66,11 +66,11 @@ export function IntroForm({
                 ? `, include some of these skills: ${data.skills}`
                 : ''
             }, and keep it short:\n${getValues('intro')}`
-          : `Write a short résumé introduction ${
+          : `Write a brief résumé introduction ${
               data.info.title ? `for a ${data.info.title}` : ''
             } ${
               data.skills.length
-                ? ` and include some of these skills: ${data.skills}: `
+                ? ` and include some of these skills: ${data.skills}`
                 : ''
             }`,
       )

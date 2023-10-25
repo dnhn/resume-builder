@@ -89,8 +89,8 @@ export function ProjectsForm({
         const { choices } = await completeChat(
           `${
             description
-              ? `Refine the content below, project ${name}’s description:\n${description}`
-              : `Write a project description for project ${name}.`
+              ? `Refine the description of the project ${name}:\n${description}`
+              : `Write a brief project description for the project ${name}.`
           }`,
         )
 
