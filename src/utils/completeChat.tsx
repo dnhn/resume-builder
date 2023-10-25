@@ -2,8 +2,7 @@ import { getChatCompletions } from 'api'
 
 export const completeChat = (prompt: string) =>
   getChatCompletions({
-    user: 'nhnd',
-    temperature: 1.2,
+    temperature: 1.4,
     messages: [
       {
         role: 'system',
@@ -19,8 +18,7 @@ export const completeChat = (prompt: string) =>
 
 export const completeQuote = () =>
   getChatCompletions({
-    user: 'nhnd',
-    temperature: 1.2,
+    temperature: 1.6,
     messages: [
       {
         role: 'system',
