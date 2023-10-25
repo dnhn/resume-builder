@@ -18,7 +18,9 @@ const DashboardPage = () => {
       const { choices } = await completeQuote()
 
       setQuote(choices[0].message.content)
-    } catch (error) {} // eslint-disable-line no-empty
+    } catch (error) {
+      //
+    }
   }, [])
 
   useEffect(() => {

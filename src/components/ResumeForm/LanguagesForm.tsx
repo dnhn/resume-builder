@@ -78,8 +78,7 @@ export function LanguagesForm({
                   label="Proficiency"
                   name={`languages.${index}.proficiency`}
                 >
-                  {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-                  <option value="" />
+                  <option aria-label="Blank value" value="" />
                   {PROFICIENCY.map((prof) => (
                     <option key={prof} value={prof}>
                       {prof}
