@@ -99,7 +99,7 @@ export function ExperienceForm({
 
         const { choices } = await completeChat(
           `Refine the content below, a job experience description of a ${title}:
-${description || `${title} a ${company}`}`,
+${description || `${title} at ${company}`}`,
         )
 
         appendContent(descriptionField, choices[0].message.content)

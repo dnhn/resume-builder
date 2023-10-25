@@ -7,7 +7,7 @@ export const completeChat = (prompt: string) =>
       {
         role: 'system',
         content:
-          'You are a helpful and creative assistant that helps job seekers writing their résumés.',
+          'You are a creative copywriter that provides job seekers with content for their résumés.',
       },
       {
         role: 'user',
