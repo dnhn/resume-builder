@@ -14,13 +14,13 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
 }
 
 const fontSans = Raleway({
-  variable: '--font-raleway',
+  variable: '--font-sans-custom',
   weight: ['400', '500', '600', '700'],
   subsets: ['latin'],
 })
 
 const fontSerif = Libre_Baskerville({
-  variable: '--font-libre-baskerville',
+  variable: '--font-serif-custom',
   weight: ['400', '700'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
