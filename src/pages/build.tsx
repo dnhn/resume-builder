@@ -103,13 +103,13 @@ const BuildPage = () => {
         })
         mutate()
         toast.success({
-          title: 'Success',
-          message: 'Résumé is updated.',
+          title: 'Success!',
+          message: 'Résumé has been saved.',
         })
       } catch (error) {
         toast.error({
-          title: 'Error',
-          message: 'Failed to update résumé.',
+          title: 'Error!',
+          message: 'Failed to save résumé.',
         })
       } finally {
         setIsSubmitting(false)
@@ -322,7 +322,7 @@ const BuildPage = () => {
               type="button"
               onClick={handleSubmit}
             >
-              Update
+              Save
             </Button>
           </div>
         </div>
