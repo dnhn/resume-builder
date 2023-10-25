@@ -2,9 +2,7 @@
     Résumé Builder
 </h1>
 
-Résumé Builder is an innovative capstone project from Dwarves Foundation’s front-end development course in 2023. This tool combines the power of artificial intelligence to offer users comprehensive assistance in refining and enhancing the content of their résumés.
-
-This project is built on top of [Dwarves Foundation](https://github.com/dwarvesf)’s [Next.js Boilerplate](https://github.com/dwarvesf/nextjs-boilerplate).
+Résumé Builder, which was built on top of Dwarves Foundation’s [Next.js Boilerplate](https://github.com/dwarvesf/nextjs-boilerplate), is an innovative capstone project from their [front-end development course](https://github.com/dwarvesf/df-frontend-2023) in 2023. This tool combines the power of artificial intelligence to offer users comprehensive assistance in refining and enhancing the content of their résumés.
 
 ## Quick Start
 
