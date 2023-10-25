@@ -58,6 +58,7 @@ export function LanguagesForm({
         <div className="space-y-4">
           <Button
             appearance="secondary"
+            size="sm"
             type="button"
             onClick={() => append({ name: '', proficiency: '' })}
           >
@@ -88,6 +89,7 @@ export function LanguagesForm({
               </div>
               <Button
                 appearance="secondary"
+                size="sm"
                 type="reset"
                 onClick={() => remove(index)}
               >
@@ -96,10 +98,10 @@ export function LanguagesForm({
             </div>
           ))}
           <div className="space-x-2 text-right">
-            <Button type="button" onClick={onComplete}>
+            <Button size="sm" type="button" onClick={onComplete}>
               Cancel
             </Button>
-            <Button appearance="primary" type="submit">
+            <Button appearance="primary" size="sm" type="submit">
               Save
             </Button>
           </div>

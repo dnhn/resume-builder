@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormTextarea } from 'components/FormInput'
+import { ResumeEnhancedInput } from 'components/ResumeEnhancedInput'
 import { toast } from 'components/Toast'
 import { useCallback, useState } from 'react'
 import { useForm, SubmitHandler, FormProvider } from 'react-hook-form'
@@ -88,32 +89,35 @@ export function IntroForm({
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <div className="relative">
-            <FormTextarea
-              disabled={isLoading}
-              label="Introduction"
-              name="intro"
-              rows={10}
-              fullWidth
-            />
-            <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+          <ResumeEnhancedInput
+            control={
               <Button
                 appearance="primary"
                 disabled={isLoading}
                 loading={isLoading}
-                size="sm"
                 type="button"
                 onClick={handleGenerateContent}
               >
                 {getValues('intro').length === 0 ? 'Suggest' : 'Refine'} content
+                ✨
               </Button>
-            </div>
-          </div>
+            }
+            field={
+              <FormTextarea
+                className="pb-16"
+                disabled={isLoading}
+                label="Introduction"
+                name="intro"
+                rows={10}
+                fullWidth
+              />
+            }
+          />
           <div className="space-x-2 text-right">
-            <Button type="button" onClick={onComplete}>
+            <Button size="sm" type="button" onClick={onComplete}>
               Cancel
             </Button>
-            <Button appearance="primary" type="submit">
+            <Button appearance="primary" size="sm" type="submit">
               Save
             </Button>
           </div>

@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput, FormTextarea } from 'components/FormInput'
+import { ResumeEnhancedInput } from 'components/ResumeEnhancedInput'
 import { Text } from 'components/Text'
 import { toast } from 'components/Toast'
 import { useCallback, useState } from 'react'
@@ -114,6 +115,7 @@ export function ProjectsForm({
         <div className="space-y-4">
           <Button
             appearance="secondary"
+            size="sm"
             type="button"
             onClick={() =>
               append({
@@ -141,34 +143,37 @@ export function ProjectsForm({
                 />
               </div>
               <div>
-                <div className="relative">
-                  <FormTextarea
-                    disabled={isLoading[`projects.${index}.description`]}
-                    label="Description"
-                    name={`projects.${index}.description`}
-                    rows={10}
-                    fullWidth
-                  />
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                <ResumeEnhancedInput
+                  control={
                     <Button
                       appearance="primary"
                       disabled={isLoading[`projects.${index}.description`]}
                       loading={isLoading[`projects.${index}.description`]}
-                      size="sm"
                       type="button"
                       onClick={() => handleGenerateContent(index)}
                     >
                       {getValues(`projects.${index}.description`).length === 0
                         ? 'Suggest'
                         : 'Refine'}{' '}
-                      description
+                      content ✨
                     </Button>
-                  </div>
-                </div>
+                  }
+                  field={
+                    <FormTextarea
+                      className="pb-16"
+                      disabled={isLoading[`projects.${index}.description`]}
+                      label="Description"
+                      name={`projects.${index}.description`}
+                      rows={10}
+                      fullWidth
+                    />
+                  }
+                />
                 <Text as="small">Markdown syntax supported</Text>
               </div>
               <Button
                 appearance="secondary"
+                size="sm"
                 type="reset"
                 onClick={() => remove(index)}
               >
@@ -177,10 +182,10 @@ export function ProjectsForm({
             </div>
           ))}
           <div className="space-x-2 text-right">
-            <Button type="button" onClick={onComplete}>
+            <Button size="sm" type="button" onClick={onComplete}>
               Cancel
             </Button>
-            <Button appearance="primary" type="submit">
+            <Button appearance="primary" size="sm" type="submit">
               Save
             </Button>
           </div>

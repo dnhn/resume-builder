@@ -44,10 +44,10 @@ export function SkillsForm({
           <FormInput label="Skills" name="skills" fullWidth />
           <Text as="small">Comma-separated values</Text>
           <div className="space-x-2 text-right">
-            <Button type="button" onClick={onComplete}>
+            <Button size="sm" type="button" onClick={onComplete}>
               Cancel
             </Button>
-            <Button appearance="primary" type="submit">
+            <Button appearance="primary" size="sm" type="submit">
               Save
             </Button>
           </div>

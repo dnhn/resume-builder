@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
 import { FormInput, FormTextarea } from 'components/FormInput'
+import { ResumeEnhancedInput } from 'components/ResumeEnhancedInput'
 import { Text } from 'components/Text'
 import { toast } from 'components/Toast'
 import { useCallback, useState } from 'react'
@@ -122,6 +123,7 @@ ${description || `${title} a ${company}`}`,
         <div className="space-y-4">
           <Button
             appearance="secondary"
+            size="sm"
             type="button"
             onClick={() =>
               append({
@@ -167,34 +169,37 @@ ${description || `${title} a ${company}`}`,
                 />
               </div>
               <div>
-                <div className="relative">
-                  <FormTextarea
-                    disabled={isLoading[`experience.${index}.description`]}
-                    label="Description"
-                    name={`experience.${index}.description`}
-                    rows={10}
-                    fullWidth
-                  />
-                  <div className="absolute bottom-2 left-1/2 -translate-x-1/2">
+                <ResumeEnhancedInput
+                  control={
                     <Button
                       appearance="primary"
                       disabled={isLoading[`experience.${index}.description`]}
                       loading={isLoading[`experience.${index}.description`]}
-                      size="sm"
                       type="button"
                       onClick={() => handleGenerateContent(index)}
                     >
                       {getValues(`experience.${index}.description`).length === 0
                         ? 'Suggest'
                         : 'Refine'}{' '}
-                      description
+                      content ✨
                     </Button>
-                  </div>
-                </div>
+                  }
+                  field={
+                    <FormTextarea
+                      className="pb-16"
+                      disabled={isLoading[`experience.${index}.description`]}
+                      label="Description"
+                      name={`experience.${index}.description`}
+                      rows={10}
+                      fullWidth
+                    />
+                  }
+                />
                 <Text as="small">Markdown syntax supported</Text>
               </div>
               <Button
                 appearance="secondary"
+                size="sm"
                 type="reset"
                 onClick={() => remove(index)}
               >
@@ -203,10 +208,10 @@ ${description || `${title} a ${company}`}`,
             </div>
           ))}
           <div className="space-x-2 text-right">
-            <Button type="button" onClick={onComplete}>
+            <Button size="sm" type="button" onClick={onComplete}>
               Cancel
             </Button>
-            <Button appearance="primary" type="submit">
+            <Button appearance="primary" size="sm" type="submit">
               Save
             </Button>
           </div>

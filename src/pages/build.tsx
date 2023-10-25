@@ -21,6 +21,7 @@ import { ResumeIntro } from 'components/ResumeIntro'
 import { ResumeLanguages } from 'components/ResumeLanguages'
 import { ResumeProjects } from 'components/ResumeProjects'
 import { ResumeSkills } from 'components/ResumeSkills'
+import { IconCheckCircleSolid } from 'components/icons/components/IconCheckCircleSolid'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
 import { useCallback, useEffect, useState } from 'react'
 import { API_ROUTES } from 'constants/routes'
@@ -210,6 +211,7 @@ const BuildPage = () => {
         <div className="-order-1 col-span-2 p-8 lg:p-12">
           <div className="text-right">
             <Button
+              Icon={IconCheckCircleSolid}
               appearance="primary"
               disabled={!isValid}
               loading={isSubmitting}
@@ -328,6 +330,7 @@ const BuildPage = () => {
           <Divider />
           <div className="text-right">
             <Button
+              Icon={IconCheckCircleSolid}
               appearance="primary"
               disabled={!isValid}
               loading={isSubmitting}

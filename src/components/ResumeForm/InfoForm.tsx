@@ -72,10 +72,15 @@ export function InfoForm({
             <FormInput label="Website" name="website" fullWidth />
           </div>
           <div className="space-x-2 text-right">
-            <Button disabled={!data.name} type="button" onClick={onComplete}>
+            <Button
+              disabled={!data.name}
+              size="sm"
+              type="button"
+              onClick={onComplete}
+            >
               Cancel
             </Button>
-            <Button appearance="primary" type="submit">
+            <Button appearance="primary" size="sm" type="submit">
               Save
             </Button>
           </div>
