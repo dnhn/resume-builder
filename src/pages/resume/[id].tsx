@@ -48,26 +48,38 @@ export default function ResumePage() {
           <>
             <div className="col-span-1 bg-slate-600 p-8 text-gray-100 prose-headings:text-white prose-a:text-white lg:p-12">
               <ResumeInfo info={data.info} />
-              <Divider />
               {data.skills.length ? (
-                <ResumeSkills skills={data.skills} />
+                <>
+                  <Divider />
+                  <ResumeSkills skills={data.skills} />
+                </>
               ) : null}
-              <Divider />
               {data.languages.length ? (
-                <ResumeLanguages languages={data.languages} />
+                <>
+                  <Divider />
+                  <ResumeLanguages languages={data.languages} />
+                </>
               ) : null}
             </div>
             <div className="-order-1 col-span-2 p-8 lg:p-12">
-              {data.intro && <ResumeIntro intro={data.intro} />}
-              <Divider />
-              <ResumeExperience experience={data.experience} />
-              <Divider />
-              {!!data.projects.length && (
-                <ResumeProjects projects={data.projects} />
+              {data.intro && (
+                <>
+                  <ResumeIntro intro={data.intro} />
+                  <Divider />
+                </>
               )}
-              <Divider />
+              <ResumeExperience experience={data.experience} />
+              {!!data.projects.length && (
+                <>
+                  <Divider />
+                  <ResumeProjects projects={data.projects} />
+                </>
+              )}
               {!!data.education.length && (
-                <ResumeEducation education={data.education} />
+                <>
+                  <Divider />
+                  <ResumeEducation education={data.education} />
+                </>
               )}
             </div>
           </>

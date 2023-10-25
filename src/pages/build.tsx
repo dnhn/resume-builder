@@ -208,6 +208,19 @@ const BuildPage = () => {
           )}
         </div>
         <div className="-order-1 col-span-2 p-8 lg:p-12">
+          <div className="text-right">
+            <Button
+              appearance="primary"
+              disabled={!isValid}
+              loading={isSubmitting}
+              size="lg"
+              type="button"
+              onClick={handleSubmit}
+            >
+              Save
+            </Button>
+          </div>
+          <Divider />
           {edit.intro ? (
             <IntroForm
               data={data}

@@ -143,6 +143,7 @@ export function ProjectsForm({
               <div>
                 <div className="relative">
                   <FormTextarea
+                    disabled={isLoading[`projects.${index}.description`]}
                     label="Description"
                     name={`projects.${index}.description`}
                     rows={10}
