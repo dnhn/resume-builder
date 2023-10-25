@@ -1,7 +1,7 @@
 import { tv } from 'tailwind-variants'
 
 const styles = tv({
-  base: 'bg-white sm:rounded-lg',
+  base: 'bg-white rounded-md sm:rounded-lg',
   variants: {
     shadow: {
       true: 'shadow',
