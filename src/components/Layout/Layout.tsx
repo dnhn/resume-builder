@@ -107,7 +107,7 @@ export const Layout = ({ children }: WithChildren) => {
         </>
       )}
       <main className="flex-1">
-        <div className="px-8 py-16">
+        <div className="px-4 py-8 sm:px-8 sm:py-16">
           <div className="mx-auto flex w-full max-w-7xl flex-col space-y-6">
             {children}
           </div>

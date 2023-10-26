@@ -128,7 +128,7 @@ const BuildPage = () => {
       </Heading>
 
       <div className="prose prose-sm max-w-none grid-cols-3 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2 lg:grid">
-        <div className="col-span-1 bg-slate-600 p-8 text-gray-100 prose-headings:text-white prose-a:text-white lg:p-12">
+        <div className="col-span-1 bg-slate-600 p-6 text-gray-100 prose-headings:text-white prose-a:text-white sm:p-8 lg:p-12">
           {edit.info ? (
             <Card>
               <InfoForm
@@ -208,7 +208,7 @@ const BuildPage = () => {
             </div>
           )}
         </div>
-        <div className="-order-1 col-span-2 p-8 lg:p-12">
+        <div className="-order-1 col-span-2 p-6 sm:p-8 lg:p-12">
           <div className="text-right">
             <Button
               Icon={IconCheckCircleSolid}

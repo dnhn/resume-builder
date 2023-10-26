@@ -47,7 +47,7 @@ export default function ResumePage() {
         )}
         {data && (
           <>
-            <div className="col-span-1 bg-slate-600 p-8 text-gray-100 prose-headings:text-white prose-a:text-white lg:p-12">
+            <div className="col-span-1 bg-slate-600 p-6 text-gray-100 prose-headings:text-white prose-a:text-white sm:p-8 lg:p-12">
               <ResumeInfo info={data.info} />
               {!(data.skills.length === 1 && data.skills.includes('')) && (
                 <>
@@ -73,7 +73,7 @@ export default function ResumePage() {
                 </Card>
               )}
             </div>
-            <div className="-order-1 col-span-2 p-8 lg:p-12">
+            <div className="-order-1 col-span-2 p-6 sm:p-8 lg:p-12">
               {data.intro && (
                 <>
                   <ResumeIntro intro={data.intro} />
