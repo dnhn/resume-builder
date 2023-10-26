@@ -20,7 +20,7 @@ export default function Document() {
         <link href="https://static.cloudflareinsights.com" rel="preconnect" />
         <meta content="#E13F5E" name="theme-color" />
       </Head>
-      <body>
+      <body className="antialiased">
         <Main />
         <NextScript />
       </body>
