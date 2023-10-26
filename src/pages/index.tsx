@@ -59,8 +59,8 @@ const DashboardPage = () => {
         </div>
       </Card>
       {quote ? (
-        <div className="prose prose-sm mx-auto w-[24rem] max-w-full text-center">
-          <Markdown className="font-serif italic">{quote}</Markdown>
+        <div className="prose mx-auto w-[24rem] max-w-full text-center font-serif italic">
+          <Markdown>{quote}</Markdown>
         </div>
       ) : (
         <div className="flex justify-center">

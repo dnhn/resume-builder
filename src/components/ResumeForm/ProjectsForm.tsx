@@ -109,24 +109,38 @@ export function ProjectsForm({
     [appendContent, getValues],
   )
 
+  const CTA = (
+    <div className="space-x-2 text-right">
+      <Button size="sm" type="button" onClick={onComplete}>
+        Cancel
+      </Button>
+      <Button appearance="primary" size="sm" type="submit">
+        Save
+      </Button>
+    </div>
+  )
+
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <Button
-            appearance="secondary"
-            size="sm"
-            type="button"
-            onClick={() =>
-              append({
-                name: '',
-                url: '',
-                description: '',
-              })
-            }
-          >
-            Add project
-          </Button>
+          <div className="flex items-center justify-between">
+            <Button
+              appearance="secondary"
+              size="sm"
+              type="button"
+              onClick={() =>
+                append({
+                  name: '',
+                  url: '',
+                  description: '',
+                })
+              }
+            >
+              Add project
+            </Button>
+            {CTA}
+          </div>
           {fields.map((field, index) => (
             <div key={field.id} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -181,14 +195,7 @@ export function ProjectsForm({
               </Button>
             </div>
           ))}
-          <div className="space-x-2 text-right">
-            <Button size="sm" type="button" onClick={onComplete}>
-              Cancel
-            </Button>
-            <Button appearance="primary" size="sm" type="submit">
-              Save
-            </Button>
-          </div>
+          {CTA}
         </div>
       </form>
     </FormProvider>

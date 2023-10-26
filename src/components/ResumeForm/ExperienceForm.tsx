@@ -117,26 +117,40 @@ ${description || `${title} at ${company}`}`,
     [appendContent, getValues],
   )
 
+  const CTA = (
+    <div className="space-x-2 text-right">
+      <Button size="sm" type="button" onClick={onComplete}>
+        Cancel
+      </Button>
+      <Button appearance="primary" size="sm" type="submit">
+        Save
+      </Button>
+    </div>
+  )
+
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <Button
-            appearance="secondary"
-            size="sm"
-            type="button"
-            onClick={() =>
-              append({
-                title: '',
-                company: '',
-                startDate: '',
-                endDate: '',
-                description: '',
-              })
-            }
-          >
-            Add experience
-          </Button>
+          <div className="flex items-center justify-between">
+            <Button
+              appearance="secondary"
+              size="sm"
+              type="button"
+              onClick={() =>
+                append({
+                  title: '',
+                  company: '',
+                  startDate: '',
+                  endDate: '',
+                  description: '',
+                })
+              }
+            >
+              Add experience
+            </Button>
+            {CTA}
+          </div>
           {fields.map((field, index) => (
             <div key={field.id} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -207,14 +221,7 @@ ${description || `${title} at ${company}`}`,
               </Button>
             </div>
           ))}
-          <div className="space-x-2 text-right">
-            <Button size="sm" type="button" onClick={onComplete}>
-              Cancel
-            </Button>
-            <Button appearance="primary" size="sm" type="submit">
-              Save
-            </Button>
-          </div>
+          {CTA}
         </div>
       </form>
     </FormProvider>
