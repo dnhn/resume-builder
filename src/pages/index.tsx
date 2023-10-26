@@ -19,7 +19,7 @@ const DashboardPage = () => {
 
       setQuote(choices[0].message.content)
     } catch (error) {
-      //
+      setQuote(' ')
     }
   }, [])
 
