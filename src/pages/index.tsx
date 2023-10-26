@@ -53,8 +53,9 @@ const DashboardPage = () => {
         </div>
         <Divider>Or browse our sample résumés</Divider>
         <div className="space-x-4">
-          <Link href={ROUTES.RESUME_BY_ID('nhnd')}>@nhnd</Link>
           <Link href={ROUTES.RESUME_BY_ID('dnhn')}>@dnhn</Link>
+          <Link href={ROUTES.RESUME_BY_ID('nhan')}>@nhan</Link>
+          <Link href={ROUTES.RESUME_BY_ID('nhnd')}>@nhnd</Link>
         </div>
       </Card>
       {quote ? (
