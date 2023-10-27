@@ -24,6 +24,8 @@ const languagesSchema = z.object({
 
 type LanguagesSchema = z.infer<typeof languagesSchema>
 
+const newField = { name: '', proficiency: '' }
+
 export function LanguagesForm({
   data,
   handleSave,
@@ -60,7 +62,7 @@ export function LanguagesForm({
             appearance="secondary"
             size="sm"
             type="button"
-            onClick={() => append({ name: '', proficiency: '' })}
+            onClick={() => append(newField)}
           >
             Add language
           </Button>

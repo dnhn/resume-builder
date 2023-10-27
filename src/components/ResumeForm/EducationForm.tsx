@@ -6,7 +6,7 @@ import { FormInput, FormTextarea } from 'components/FormInput'
 import { ResumeEnhancedInput } from 'components/ResumeEnhancedInput'
 import { Text } from 'components/Text'
 import { toast } from 'components/Toast'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -46,6 +46,16 @@ const educationSchema = z.object({
 })
 
 type EducationSchema = z.infer<typeof educationSchema>
+
+const newField = {
+  school: '',
+  degree: '',
+  field: '',
+  startDate: '',
+  endDate: '',
+  current: [],
+  description: '',
+}
 
 export function EducationForm({
   data,
@@ -122,42 +132,35 @@ export function EducationForm({
     [appendContent, getValues],
   )
 
-  const CTA = (
-    <div className="space-x-2 text-right">
-      <Button size="sm" type="button" onClick={onComplete}>
-        Cancel
-      </Button>
-      <Button appearance="primary" size="sm" type="submit">
-        Save
-      </Button>
-    </div>
+  const CTA = useMemo(
+    () => (
+      <div className="flex items-center justify-between">
+        <Button
+          appearance="secondary"
+          size="sm"
+          type="button"
+          onClick={() => append(newField)}
+        >
+          Add education
+        </Button>
+        <div className="space-x-2 text-right">
+          <Button size="sm" type="button" onClick={onComplete}>
+            Cancel
+          </Button>
+          <Button appearance="primary" size="sm" type="submit">
+            Save
+          </Button>
+        </div>
+      </div>
+    ),
+    [append, onComplete],
   )
 
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Button
-              appearance="secondary"
-              size="sm"
-              type="button"
-              onClick={() =>
-                append({
-                  school: '',
-                  degree: '',
-                  field: '',
-                  startDate: '',
-                  endDate: '',
-                  current: [],
-                  description: '',
-                })
-              }
-            >
-              Add education
-            </Button>
-            {CTA}
-          </div>
+          {CTA}
           {fields.map((field, index) => (
             <div key={field.id} className="space-y-4">
               <div className="grid grid-cols-3 gap-4">
@@ -240,7 +243,7 @@ export function EducationForm({
               </Button>
             </div>
           ))}
-          {CTA}
+          {fields.length > 0 && CTA}
         </div>
       </form>
     </FormProvider>

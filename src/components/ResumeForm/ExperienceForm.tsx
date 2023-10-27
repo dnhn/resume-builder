@@ -4,7 +4,7 @@ import { FormInput, FormTextarea } from 'components/FormInput'
 import { ResumeEnhancedInput } from 'components/ResumeEnhancedInput'
 import { Text } from 'components/Text'
 import { toast } from 'components/Toast'
-import { useCallback, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -42,6 +42,14 @@ const experienceSchema = z.object({
 })
 
 type ExperienceSchema = z.infer<typeof experienceSchema>
+
+const newField = {
+  title: '',
+  company: '',
+  startDate: '',
+  endDate: '',
+  description: '',
+}
 
 export function ExperienceForm({
   data,
@@ -117,40 +125,35 @@ ${description || `${title} at ${company}`}`,
     [appendContent, getValues],
   )
 
-  const CTA = (
-    <div className="space-x-2 text-right">
-      <Button size="sm" type="button" onClick={onComplete}>
-        Cancel
-      </Button>
-      <Button appearance="primary" size="sm" type="submit">
-        Save
-      </Button>
-    </div>
+  const CTA = useMemo(
+    () => (
+      <div className="flex items-center justify-between">
+        <Button
+          appearance="secondary"
+          size="sm"
+          type="button"
+          onClick={() => append(newField)}
+        >
+          Add experience
+        </Button>
+        <div className="space-x-2 text-right">
+          <Button size="sm" type="button" onClick={onComplete}>
+            Cancel
+          </Button>
+          <Button appearance="primary" size="sm" type="submit">
+            Save
+          </Button>
+        </div>
+      </div>
+    ),
+    [append, onComplete],
   )
 
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <Button
-              appearance="secondary"
-              size="sm"
-              type="button"
-              onClick={() =>
-                append({
-                  title: '',
-                  company: '',
-                  startDate: '',
-                  endDate: '',
-                  description: '',
-                })
-              }
-            >
-              Add experience
-            </Button>
-            {CTA}
-          </div>
+          {CTA}
           {fields.map((field, index) => (
             <div key={field.id} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -221,7 +224,7 @@ ${description || `${title} at ${company}`}`,
               </Button>
             </div>
           ))}
-          {CTA}
+          {fields.length > 0 && CTA}
         </div>
       </form>
     </FormProvider>
