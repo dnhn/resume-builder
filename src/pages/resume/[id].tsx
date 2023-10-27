@@ -35,7 +35,7 @@ export default function ResumePage({ resume }: { resume: IResume }) {
           <>
             <div className="col-span-1 bg-slate-600 p-6 text-gray-100 prose-headings:text-white prose-a:text-white sm:p-8 lg:p-12">
               <ResumeInfo info={resume.info} />
-              {!(resume.skills.length === 1 && resume.skills.includes('')) && (
+              {!!resume.skills.length && (
                 <>
                   <Divider />
                   <ResumeSkills skills={resume.skills} />

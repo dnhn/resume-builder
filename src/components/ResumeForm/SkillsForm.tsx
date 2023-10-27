@@ -29,11 +29,11 @@ export function SkillsForm({
 
   const { handleSubmit } = form
 
-  const onSubmit: SubmitHandler<SkillsSchema> = (data) => {
-    let skills = data.skills.split(',')
-    skills = skills.map((skill) => skill.trim())
-
-    handleSave(skills)
+  const onSubmit: SubmitHandler<SkillsSchema> = ({ skills }) => {
+    // 1. Check if data is empty
+    // 2. Split string into array
+    // 3. Trim array elements
+    handleSave(skills ? skills.split(',').map((skill) => skill.trim()) : [])
     onComplete()
   }
 
