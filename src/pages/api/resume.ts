@@ -15,10 +15,4 @@ export default async function handler(
       ? response.status(200).json({ message: 'Résumé has been saved.' })
       : response.status(500).json({ message: 'Failed to save résumé.' })
   }
-
-  const resume = await kv.get(`resume:${request.query.id as string}`)
-
-  return resume
-    ? response.status(200).json(resume)
-    : response.status(400).json({ message: 'Résumé not found.' })
 }

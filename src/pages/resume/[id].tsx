@@ -1,4 +1,4 @@
-import axios from 'axios'
+import { kv } from '@vercel/kv'
 import { Card } from 'components/Card'
 import { Divider } from 'components/Divider'
 import { Layout } from 'components/Layout'
@@ -9,56 +9,42 @@ import { ResumeIntro } from 'components/ResumeIntro'
 import { ResumeLanguages } from 'components/ResumeLanguages'
 import { ResumeProjects } from 'components/ResumeProjects'
 import { ResumeSkills } from 'components/ResumeSkills'
-import { API_ROUTES, ROUTES } from 'constants/routes'
+import { ROUTES } from 'constants/routes'
 import { useAuthContext } from 'context/auth'
+import { NextApiRequest } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
 import { IResume } from 'types/resume'
 
-const fetcher = (url: string) =>
-  axios.get(url).then((response) => response.data)
-
-export default function ResumePage() {
+export default function ResumePage({ resume }: { resume: IResume }) {
   const { query } = useRouter()
   const { isLogin, user } = useAuthContext()
-  const { data, error, isLoading } = useSWR<IResume>(
-    API_ROUTES.GET_RESUME(query.id as string),
-    fetcher,
-  )
 
   return (
     <Layout>
       <Head>
         <title>
-          {data?.info.name
-            ? `${data.info.name} | Résumé Builder`
+          {resume && resume.info.name
+            ? `${resume.info.name} | Résumé Builder`
             : 'Résumé Builder'}
         </title>
       </Head>
       <div className="prose prose-sm max-w-none grid-cols-3 rounded-none bg-neutral-50 shadow-md prose-p:font-serif prose-a:font-sans prose-a:underline-offset-2 lg:grid">
-        {isLoading && (
-          <div className="col-span-3 p-12">
-            <div className="text-center text-3xl font-medium leading-normal">
-              Loading {query.id === user ? 'your' : ''} résumé…
-            </div>
-          </div>
-        )}
-        {data && (
+        {resume ? (
           <>
             <div className="col-span-1 bg-slate-600 p-6 text-gray-100 prose-headings:text-white prose-a:text-white sm:p-8 lg:p-12">
-              <ResumeInfo info={data.info} />
-              {!(data.skills.length === 1 && data.skills.includes('')) && (
+              <ResumeInfo info={resume.info} />
+              {!(resume.skills.length === 1 && resume.skills.includes('')) && (
                 <>
                   <Divider />
-                  <ResumeSkills skills={data.skills} />
+                  <ResumeSkills skills={resume.skills} />
                 </>
               )}
-              {!!data.languages.length && (
+              {!!resume.languages.length && (
                 <>
                   <Divider />
-                  <ResumeLanguages languages={data.languages} />
+                  <ResumeLanguages languages={resume.languages} />
                 </>
               )}
               {!isLogin && (
@@ -74,29 +60,28 @@ export default function ResumePage() {
               )}
             </div>
             <div className="-order-1 col-span-2 p-6 sm:p-8 lg:p-12">
-              {data.intro && (
+              {resume.intro && (
                 <>
-                  <ResumeIntro intro={data.intro} />
+                  <ResumeIntro intro={resume.intro} />
                   <Divider />
                 </>
               )}
-              <ResumeExperience experience={data.experience} />
-              {!!data.projects.length && (
+              <ResumeExperience experience={resume.experience} />
+              {!!resume.projects.length && (
                 <>
                   <Divider />
-                  <ResumeProjects projects={data.projects} />
+                  <ResumeProjects projects={resume.projects} />
                 </>
               )}
-              {!!data.education.length && (
+              {!!resume.education.length && (
                 <>
                   <Divider />
-                  <ResumeEducation education={data.education} />
+                  <ResumeEducation education={resume.education} />
                 </>
               )}
             </div>
           </>
-        )}
-        {!isLoading && error && (
+        ) : (
           <div className="col-span-3 p-12">
             <div className="mx-auto max-w-xl text-center text-3xl font-medium leading-normal">
               {query.id === user
@@ -108,4 +93,11 @@ export default function ResumePage() {
       </div>
     </Layout>
   )
+}
+
+export const getServerSideProps = async (request: NextApiRequest) => {
+  const key = `resume:${request.query.id}`
+  const resume = await kv.get(key)
+
+  return { props: { resume } }
 }
