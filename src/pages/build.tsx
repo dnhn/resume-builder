@@ -23,7 +23,7 @@ import { ResumeProjects } from 'components/ResumeProjects'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { IconCheckCircleSolid } from 'components/icons/components/IconCheckCircleSolid'
 import { IconPencilSolid } from 'components/icons/components/IconPencilSolid'
-import { useCallback, useEffect, useState } from 'react'
+import { MouseEventHandler, useCallback, useEffect, useState } from 'react'
 import { API_ROUTES } from 'constants/routes'
 import useSWR from 'swr'
 import {
@@ -49,6 +49,40 @@ const initialData = {
 
 const fetcher = (url: string) =>
   axios.get(url).then((response) => response.data)
+
+const EditButton = ({
+  onClick,
+}: {
+  onClick: MouseEventHandler<HTMLButtonElement>
+}) => (
+  <span className="absolute top-0 right-0">
+    <Button size="sm" type="button" onClick={onClick}>
+      <IconPencilSolid />
+    </Button>
+  </span>
+)
+
+const CompleteButton = ({
+  isValid,
+  isSubmitting,
+  onClick,
+}: {
+  isValid: number | ''
+  isSubmitting: boolean
+  onClick: MouseEventHandler<HTMLButtonElement>
+}) => (
+  <Button
+    Icon={IconCheckCircleSolid}
+    appearance="primary"
+    disabled={!isValid}
+    loading={isSubmitting}
+    size="lg"
+    type="button"
+    onClick={onClick}
+  >
+    Complete
+  </Button>
+)
 
 const BuildPage = () => {
   const { user } = useAuthContext()
@@ -87,7 +121,7 @@ const BuildPage = () => {
   const setEducation = (education: IResumeEducation[]) =>
     setData((data) => ({ ...data, education }))
 
-  const isValid = data.info.name && data.intro && data.experience.length
+  const isValid = data.info.name && data.experience.length
 
   const handleSubmit = useCallback(async () => {
     if (isValid) {
@@ -140,17 +174,11 @@ const BuildPage = () => {
           ) : (
             <div className="relative">
               <ResumeInfo info={data.info} />
-              <span className="absolute top-0 right-0">
-                <Button
-                  size="sm"
-                  type="button"
-                  onClick={() =>
-                    setEdit((edit) => ({ ...edit, info: !edit.info }))
-                  }
-                >
-                  <IconPencilSolid />
-                </Button>
-              </span>
+              <EditButton
+                onClick={() =>
+                  setEdit((edit) => ({ ...edit, info: !edit.info }))
+                }
+              />
             </div>
           )}
           <Divider />
@@ -167,17 +195,11 @@ const BuildPage = () => {
           ) : (
             <div className="relative">
               <ResumeSkills skills={data.skills} />
-              <span className="absolute top-0 right-0">
-                <Button
-                  size="sm"
-                  type="button"
-                  onClick={() =>
-                    setEdit((edit) => ({ ...edit, skills: !edit.skills }))
-                  }
-                >
-                  <IconPencilSolid />
-                </Button>
-              </span>
+              <EditButton
+                onClick={() =>
+                  setEdit((edit) => ({ ...edit, skills: !edit.skills }))
+                }
+              />
             </div>
           )}
           <Divider />
@@ -194,33 +216,21 @@ const BuildPage = () => {
           ) : (
             <div className="relative">
               <ResumeLanguages languages={data.languages} />
-              <span className="absolute top-0 right-0">
-                <Button
-                  size="sm"
-                  type="button"
-                  onClick={() =>
-                    setEdit((edit) => ({ ...edit, languages: !edit.languages }))
-                  }
-                >
-                  <IconPencilSolid />
-                </Button>
-              </span>
+              <EditButton
+                onClick={() =>
+                  setEdit((edit) => ({ ...edit, languages: !edit.languages }))
+                }
+              />
             </div>
           )}
         </div>
         <div className="-order-1 col-span-2 p-6 sm:p-8 lg:p-12">
           <div className="text-right">
-            <Button
-              Icon={IconCheckCircleSolid}
-              appearance="primary"
-              disabled={!isValid}
-              loading={isSubmitting}
-              size="lg"
-              type="button"
+            <CompleteButton
+              isSubmitting={isSubmitting}
+              isValid={isValid}
               onClick={handleSubmit}
-            >
-              Save
-            </Button>
+            />
           </div>
           <Divider />
           {edit.intro ? (
@@ -232,18 +242,11 @@ const BuildPage = () => {
           ) : (
             <div className="relative">
               <ResumeIntro intro={data.intro} />
-              <span className="absolute top-0 right-0">
-                <Button
-                  appearance="secondary"
-                  size="sm"
-                  type="button"
-                  onClick={() =>
-                    setEdit((edit) => ({ ...edit, intro: !edit.intro }))
-                  }
-                >
-                  <IconPencilSolid />
-                </Button>
-              </span>
+              <EditButton
+                onClick={() =>
+                  setEdit((edit) => ({ ...edit, intro: !edit.intro }))
+                }
+              />
             </div>
           )}
           <Divider />
@@ -258,21 +261,14 @@ const BuildPage = () => {
           ) : (
             <div className="relative">
               <ResumeExperience experience={data.experience} />
-              <span className="absolute top-0 right-0">
-                <Button
-                  appearance="secondary"
-                  size="sm"
-                  type="button"
-                  onClick={() =>
-                    setEdit((edit) => ({
-                      ...edit,
-                      experience: !edit.experience,
-                    }))
-                  }
-                >
-                  <IconPencilSolid />
-                </Button>
-              </span>
+              <EditButton
+                onClick={() =>
+                  setEdit((edit) => ({
+                    ...edit,
+                    experience: !edit.experience,
+                  }))
+                }
+              />
             </div>
           )}
           <Divider />
@@ -287,18 +283,11 @@ const BuildPage = () => {
           ) : (
             <div className="relative">
               <ResumeProjects projects={data.projects} />
-              <span className="absolute top-0 right-0">
-                <Button
-                  appearance="secondary"
-                  size="sm"
-                  type="button"
-                  onClick={() =>
-                    setEdit((edit) => ({ ...edit, projects: !edit.projects }))
-                  }
-                >
-                  <IconPencilSolid />
-                </Button>
-              </span>
+              <EditButton
+                onClick={() =>
+                  setEdit((edit) => ({ ...edit, projects: !edit.projects }))
+                }
+              />
             </div>
           )}
           <Divider />
@@ -313,33 +302,20 @@ const BuildPage = () => {
           ) : (
             <div className="relative">
               <ResumeEducation education={data.education} />
-              <span className="absolute top-0 right-0">
-                <Button
-                  appearance="secondary"
-                  size="sm"
-                  type="button"
-                  onClick={() =>
-                    setEdit((edit) => ({ ...edit, education: !edit.education }))
-                  }
-                >
-                  <IconPencilSolid />
-                </Button>
-              </span>
+              <EditButton
+                onClick={() =>
+                  setEdit((edit) => ({ ...edit, education: !edit.education }))
+                }
+              />
             </div>
           )}
           <Divider />
           <div className="text-right">
-            <Button
-              Icon={IconCheckCircleSolid}
-              appearance="primary"
-              disabled={!isValid}
-              loading={isSubmitting}
-              size="lg"
-              type="button"
+            <CompleteButton
+              isSubmitting={isSubmitting}
+              isValid={isValid}
               onClick={handleSubmit}
-            >
-              Save
-            </Button>
+            />
           </div>
         </div>
       </div>
