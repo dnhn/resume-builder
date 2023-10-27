@@ -54,6 +54,13 @@ export function IntroForm({
   const handleGenerateContent = useCallback(async () => {
     const intro = getValues('intro')
 
+    if (!data.info.title || data.skills.length === 0) {
+      toast.info({
+        title:
+          'Please provide Job title and Skills to receive more relevant suggestions.',
+      })
+    }
+
     try {
       setIsLoading(true)
 

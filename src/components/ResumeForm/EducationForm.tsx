@@ -105,28 +105,36 @@ export function EducationForm({
       const descriptionField = `education.${index}.description`
       const description = getValues(`education.${index}.description`)
 
-      try {
-        setIsLoading((state) => ({
-          ...state,
-          [descriptionField]: true,
-        }))
+      if (degree && field) {
+        try {
+          setIsLoading((state) => ({
+            ...state,
+            [descriptionField]: true,
+          }))
 
-        const { choices } = await completeChat(
-          `Write an education description in the résumé of a ${degree} in ${field} ${
-            description ? `by refining the content below:\n${description}` : '.'
-          }`,
-        )
+          const { choices } = await completeChat(
+            `Write an education description in the résumé of a ${degree} in ${field} ${
+              description
+                ? `by refining the content below:\n${description}`
+                : '.'
+            }`,
+          )
 
-        appendContent(descriptionField, choices[0].message.content)
-      } catch (error) {
-        toast.error({
-          title: 'An error occurred.',
+          appendContent(descriptionField, choices[0].message.content)
+        } catch (error) {
+          toast.error({
+            title: 'An error occurred.',
+          })
+        } finally {
+          setIsLoading((state) => ({
+            ...state,
+            [descriptionField]: false,
+          }))
+        }
+      } else {
+        toast.info({
+          title: 'Please provide Degree and Field to receive suggestions.',
         })
-      } finally {
-        setIsLoading((state) => ({
-          ...state,
-          [descriptionField]: false,
-        }))
       }
     },
     [appendContent, getValues],

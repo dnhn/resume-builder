@@ -86,30 +86,36 @@ export function ProjectsForm({
       const descriptionField = `projects.${index}.description`
       const description = getValues(`projects.${index}.description`)
 
-      try {
-        setIsLoading((state) => ({
-          ...state,
-          [descriptionField]: true,
-        }))
+      if (name) {
+        try {
+          setIsLoading((state) => ({
+            ...state,
+            [descriptionField]: true,
+          }))
 
-        const { choices } = await completeChat(
-          `${
-            description
-              ? `Refine the description of the project ${name}:\n${description}`
-              : `Write a brief project description for the project ${name}.`
-          }`,
-        )
+          const { choices } = await completeChat(
+            `${
+              description
+                ? `Refine the description of the project ${name}:\n${description}`
+                : `Write a brief project description for the project ${name}.`
+            }`,
+          )
 
-        appendContent(descriptionField, choices[0].message.content)
-      } catch (error) {
-        toast.error({
-          title: 'An error occurred.',
+          appendContent(descriptionField, choices[0].message.content)
+        } catch (error) {
+          toast.error({
+            title: 'An error occurred.',
+          })
+        } finally {
+          setIsLoading((state) => ({
+            ...state,
+            [descriptionField]: false,
+          }))
+        }
+      } else {
+        toast.info({
+          title: 'Please provide project name to receive suggestions.',
         })
-      } finally {
-        setIsLoading((state) => ({
-          ...state,
-          [descriptionField]: false,
-        }))
       }
     },
     [appendContent, getValues],

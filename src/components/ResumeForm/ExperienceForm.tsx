@@ -99,27 +99,33 @@ export function ExperienceForm({
       const descriptionField = `experience.${index}.description`
       const description = getValues(`experience.${index}.description`)
 
-      try {
-        setIsLoading((state) => ({
-          ...state,
-          [descriptionField]: true,
-        }))
+      if (title) {
+        try {
+          setIsLoading((state) => ({
+            ...state,
+            [descriptionField]: true,
+          }))
 
-        const { choices } = await completeChat(
-          `Refine the content below, a job experience description of a ${title}:
-${description || `${title} at ${company}`}`,
-        )
+          const { choices } = await completeChat(
+            `Refine the content below, a job experience description of a ${title}:
+  ${description || `${title} at ${company}`}`,
+          )
 
-        appendContent(descriptionField, choices[0].message.content)
-      } catch (error) {
-        toast.error({
-          title: 'An error occurred.',
+          appendContent(descriptionField, choices[0].message.content)
+        } catch (error) {
+          toast.error({
+            title: 'An error occurred.',
+          })
+        } finally {
+          setIsLoading((state) => ({
+            ...state,
+            [descriptionField]: false,
+          }))
+        }
+      } else {
+        toast.info({
+          title: 'Please provide Title to receive suggestions.',
         })
-      } finally {
-        setIsLoading((state) => ({
-          ...state,
-          [descriptionField]: false,
-        }))
       }
     },
     [appendContent, getValues],
