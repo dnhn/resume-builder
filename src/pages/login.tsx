@@ -47,7 +47,7 @@ const LoginPage = () => {
     setIsLoading(true)
     try {
       await login(data.username, data.password)
-    } catch (error) {
+    } catch {
       toast.error({ title: 'Invalid username or password' })
     } finally {
       setIsLoading(false)

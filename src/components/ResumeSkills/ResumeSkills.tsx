@@ -8,9 +8,7 @@ export const ResumeSkills = ({ skills }: { skills: string[] }) => {
       <ResumeHeading>Skills</ResumeHeading>
       <div className="mt-6 flex flex-wrap gap-4">
         {skills.map((skill, index) => (
-          <Badge key={index} className="font-semibold">
-            {skill}
-          </Badge>
+          <Badge key={index}>{skill}</Badge>
         ))}
       </div>
     </ResumeSection>

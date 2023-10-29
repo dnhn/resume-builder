@@ -7,6 +7,7 @@ export const ROUTES = {
 }
 
 export const API_ROUTES = {
+  CHECK_AUTH: (username: string) => `/api/check-auth?username=${username}`,
   GET_RESUME: (id: string) => `/api/resume?id=${id}`,
   UPDATE_RESUME: (id: string) => `/api/resume?id=${id}`,
 }

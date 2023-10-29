@@ -83,7 +83,7 @@ export function IntroForm({
       )
 
       appendContent(choices[0].message.content)
-    } catch (error) {
+    } catch {
       toast.error({
         title: 'An error occurred.',
       })

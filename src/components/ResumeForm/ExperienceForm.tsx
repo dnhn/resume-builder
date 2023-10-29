@@ -112,7 +112,7 @@ export function ExperienceForm({
           )
 
           appendContent(descriptionField, choices[0].message.content)
-        } catch (error) {
+        } catch {
           toast.error({
             title: 'An error occurred.',
           })

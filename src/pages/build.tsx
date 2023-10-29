@@ -141,7 +141,7 @@ const BuildPage = () => {
           title: 'Success!',
           message: 'Résumé has been saved.',
         })
-      } catch (error) {
+      } catch {
         toast.error({
           title: 'Error!',
           message: 'Failed to save résumé.',

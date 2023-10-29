@@ -18,7 +18,7 @@ const DashboardPage = () => {
       const { choices } = await completeQuote()
 
       setQuote(choices[0].message.content)
-    } catch (error) {
+    } catch {
       setQuote(' ')
     }
   }, [])
