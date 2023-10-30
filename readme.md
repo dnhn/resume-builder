@@ -15,14 +15,6 @@ cd my-project-name
 pnpm install
 ```
 
-[Vercel KV](https://vercel.com/storage/kv) is used for data storage, follow this
-[guide](https://vercel.com/docs/storage/vercel-kv/quickstart) to setup and pull
-the environment variables to local for development.
-
-```bash
-vercel env pull .env.development.local
-```
-
 Then, you can run locally in development mode with live reload:
 
 ```bash
@@ -30,3 +22,11 @@ pnpm dev
 ```
 
 Open http://localhost:3000 in your browser to view the project.
+
+## Database
+
+[DynamoDB](https://aws.amazon.com/dynamodb) is utilised for data storage,
+replacing [Vercel KV](https://vercel.com/storage/kv) due to exceeding request
+limits. To save résumés, you will need to setup your own table and add
+credentials. Please refer to [`database.ts`](./src/database.ts) for more
+information.

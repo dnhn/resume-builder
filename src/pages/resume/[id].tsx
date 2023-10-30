@@ -1,4 +1,3 @@
-import { kv } from '@vercel/kv'
 import { Card } from 'components/Card'
 import { Divider } from 'components/Divider'
 import { Layout } from 'components/Layout'
@@ -11,6 +10,7 @@ import { ResumeProjects } from 'components/ResumeProjects'
 import { ResumeSkills } from 'components/ResumeSkills'
 import { ROUTES } from 'constants/routes'
 import { useAuthContext } from 'context/auth'
+import { getDbItem } from 'database'
 import { NextApiRequest } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -97,7 +97,7 @@ export default function ResumePage({ resume }: { resume: IResume }) {
 
 export const getServerSideProps = async (request: NextApiRequest) => {
   const key = `resume:${request.query.id}`
-  const resume = await kv.get(key)
+  const resume = await getDbItem(key)
 
-  return { props: { resume } }
+  return { props: { resume: resume.Item?.data } }
 }

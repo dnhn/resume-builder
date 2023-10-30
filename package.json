@@ -21,6 +21,8 @@
     "generate:api": "orval --config ./orval.config.js"
   },
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.438.0",
+    "@aws-sdk/lib-dynamodb": "^3.438.0",
     "@babel/eslint-parser": "^7.22.10",
     "@dwarvesf/react-hooks": "^0.7.0",
     "@dwarvesf/react-utils": "^0.4.1",
