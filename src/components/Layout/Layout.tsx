@@ -33,21 +33,13 @@ const menuItems = [
 export const Layout = ({ children }: WithChildren) => {
   const { pathname } = useRouter()
   const [hydrated, setHydrated] = useState(false)
-
   const { isLogin, logout, user } = useAuthContext()
-  const { push } = useRouter()
-
-  const resumePage = pathname.startsWith(ROUTES.RESUME)
 
   useEffect(() => {
-    if (!resumePage && !isLogin) {
-      push(ROUTES.LOGIN)
-    } else {
-      setHydrated(true)
-    }
-  }, [isLogin, push, resumePage])
+    setHydrated(true)
+  }, [])
 
-  if ((!resumePage && !isLogin) || !hydrated) {
+  if (!hydrated) {
     return null
   }
 

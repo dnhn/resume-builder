@@ -22,11 +22,15 @@ export default async function handler(
   }
 
   if (request.method === 'POST' && request.body.accessToken) {
-    const token = await getDbItem(key)
+    try {
+      const token = await getDbItem(key)
 
-    return token.Item?.data === request.body.accessToken
-      ? response.status(200).json({})
-      : response.status(400).json({})
+      return response
+        .status(token.Item?.data === request.body.accessToken ? 200 : 400)
+        .json({})
+    } catch {
+      return response.status(400).json({})
+    }
   }
 
   if (request.method === 'DELETE') {

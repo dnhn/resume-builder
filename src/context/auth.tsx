@@ -1,10 +1,11 @@
 import { createContext, isSSR } from '@dwarvesf/react-utils'
-import { useCallback, useEffect, useState } from 'react'
-import { WithChildren } from 'types/common'
 import { login as signIn } from 'api'
-import { emitter } from 'utils/emitter'
-import { API_ROUTES } from 'constants/routes'
 import axios from 'axios'
+import { API_ROUTES, ROUTES } from 'constants/routes'
+import { useRouter } from 'next/router'
+import { useState, useCallback, useEffect } from 'react'
+import { WithChildren } from 'types/common'
+import { emitter } from 'utils/emitter'
 
 interface AuthContextValues {
   isLogin: boolean
@@ -26,6 +27,7 @@ const cleanAuth = () => {
 }
 
 const AuthContextProvider = ({ children }: WithChildren) => {
+  const { pathname, replace } = useRouter()
   const [isLogin, setIsLogin] = useState(() => {
     return isSSR() ? false : Boolean(window.localStorage.getItem(tokenKey))
   })
@@ -57,11 +59,15 @@ const AuthContextProvider = ({ children }: WithChildren) => {
     } catch {
       //
     } finally {
+      if (!pathname.startsWith(`${ROUTES.RESUME}/`)) {
+        replace(ROUTES.LOGIN)
+      }
+
       setIsLogin(false)
       setUser('')
       cleanAuth()
     }
-  }, [user])
+  }, [pathname, replace, user])
 
   const checkSession = useCallback(async (user: string) => {
     try {

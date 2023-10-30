@@ -96,8 +96,12 @@ export default function ResumePage({ resume }: { resume: IResume }) {
 }
 
 export const getServerSideProps = async (request: NextApiRequest) => {
-  const key = `resume:${request.query.id}`
-  const resume = await getDbItem(key)
+  try {
+    const key = `resume:${request.query.id}`
+    const resume = await getDbItem(key)
 
-  return { props: { resume: resume.Item?.data } }
+    return { props: resume.Item?.data ? { resume: resume.Item?.data } : {} }
+  } catch {
+    return { props: {} }
+  }
 }
