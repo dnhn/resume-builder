@@ -63,16 +63,20 @@ const AuthContextProvider = ({ children }: WithChildren) => {
     }
   }, [user])
 
-  const checkSession = useCallback(async () => {
+  const checkSession = useCallback(async (user: string) => {
     try {
-      await axios.post(API_ROUTES.CHECK_AUTH(user), { accessToken: getToken() })
+      await axios.post(API_ROUTES.CHECK_AUTH(user), {
+        accessToken: getToken(),
+      })
     } catch {
       emitter.emit('FORCE_LOGOUT')
     }
-  }, [user])
+  }, [])
 
   useEffect(() => {
-    checkSession()
+    if (isLogin) {
+      checkSession(user)
+    }
   }, [checkSession, isLogin, user])
 
   useEffect(() => {
