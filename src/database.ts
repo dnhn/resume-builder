@@ -6,15 +6,7 @@ import {
   PutCommand,
 } from '@aws-sdk/lib-dynamodb'
 
-const docClient = DynamoDBDocumentClient.from(
-  new DynamoDBClient({
-    region: process.env.USER_AWS_REGION || '',
-    credentials: {
-      accessKeyId: process.env.USER_AWS_ACCESS_KEY || '',
-      secretAccessKey: process.env.USER_AWS_SECRET_KEY || '',
-    },
-  }),
-)
+const docClient = DynamoDBDocumentClient.from(new DynamoDBClient({}))
 
 export const getDbItem = (key: string) =>
   docClient.send(
