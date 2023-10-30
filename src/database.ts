@@ -16,7 +16,7 @@ const docClient = DynamoDBDocumentClient.from(
   }),
 )
 
-export const getDbItem = async (key: string) =>
+export const getDbItem = (key: string) =>
   docClient.send(
     new GetCommand({
       TableName: process.env.USER_DYNAMODB_TABLE || '',
@@ -24,7 +24,7 @@ export const getDbItem = async (key: string) =>
     }),
   )
 
-export const putDbItem = async (key: string, data: any) =>
+export const putDbItem = (key: string, data: any) =>
   docClient.send(
     new PutCommand({
       TableName: process.env.USER_DYNAMODB_TABLE || '',
@@ -35,7 +35,7 @@ export const putDbItem = async (key: string, data: any) =>
     }),
   )
 
-export const deleteDbItem = async (key: string) =>
+export const deleteDbItem = (key: string) =>
   docClient.send(
     new DeleteCommand({
       TableName: process.env.USER_DYNAMODB_TABLE || '',
