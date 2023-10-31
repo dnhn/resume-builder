@@ -1,9 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button } from 'components/Button'
+import { Card } from 'components/Card'
 import { FormInput, FormTextarea } from 'components/FormInput'
 import { ResumeEnhancedInput } from 'components/ResumeEnhancedInput'
 import { Text } from 'components/Text'
 import { toast } from 'components/Toast'
+import { IconArrowSmDown } from 'components/icons/components/IconArrowSmDown'
+import { IconArrowSmUp } from 'components/icons/components/IconArrowSmUp'
+import { IconClose } from 'components/icons/components/IconClose'
 import { useCallback, useMemo, useState } from 'react'
 import {
   FormProvider,
@@ -60,7 +64,7 @@ export function ProjectsForm({
 
   watch()
 
-  const { append, fields, remove } = useFieldArray({
+  const { append, fields, move, remove } = useFieldArray({
     control,
     name: 'projects',
   })
@@ -151,7 +155,43 @@ export function ProjectsForm({
         <div className="space-y-4">
           {CTA}
           {fields.map((field, index) => (
-            <div key={field.id} className="space-y-4">
+            <Card key={field.id} className="space-y-4">
+              <div className="flex items-center justify-between">
+                <div className="space-x-2">
+                  {index > 0 && (
+                    <Button
+                      className="!rounded-full !p-2"
+                      size="sm"
+                      title="Move up"
+                      type="button"
+                      onClick={() => move(index, index - 1)}
+                    >
+                      <IconArrowSmUp />
+                    </Button>
+                  )}
+                  {index < fields.length - 1 && (
+                    <Button
+                      className="!rounded-full !p-2"
+                      size="sm"
+                      title="Move down"
+                      type="button"
+                      onClick={() => move(index, index + 1)}
+                    >
+                      <IconArrowSmDown />
+                    </Button>
+                  )}
+                </div>
+                <Button
+                  appearance="secondary"
+                  className="!rounded-full !p-2"
+                  size="sm"
+                  title="Remove"
+                  type="button"
+                  onClick={() => remove(index)}
+                >
+                  <IconClose />
+                </Button>
+              </div>
               <div className="grid grid-cols-2 gap-4">
                 <FormInput
                   label="Name"
@@ -194,15 +234,7 @@ export function ProjectsForm({
                 />
                 <Text as="small">Markdown syntax supported</Text>
               </div>
-              <Button
-                appearance="secondary"
-                size="sm"
-                type="reset"
-                onClick={() => remove(index)}
-              >
-                Remove
-              </Button>
-            </div>
+            </Card>
           ))}
           {fields.length > 0 && CTA}
         </div>

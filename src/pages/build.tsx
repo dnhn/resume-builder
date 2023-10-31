@@ -56,7 +56,7 @@ const EditButton = ({
   onClick: MouseEventHandler<HTMLButtonElement>
 }) => (
   <span className="absolute top-0 right-0">
-    <Button size="sm" type="button" onClick={onClick}>
+    <Button size="sm" title="Edit" type="button" onClick={onClick}>
       <IconPencilSolid />
     </Button>
   </span>
