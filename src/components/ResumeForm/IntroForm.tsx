@@ -45,8 +45,7 @@ export function IntroForm({
     (content: string) =>
       setValue(
         'intro',
-        `${getValues('intro')}\n\n---
-\nHere is your generated content:\n\n${content}`,
+        `${content}\n\n---\n\n### Previous content:\n\n${getValues('intro')}`,
       ),
     [getValues, setValue],
   )
@@ -82,7 +81,11 @@ export function IntroForm({
             }`,
       )
 
-      appendContent(choices[0].message.content)
+      if (intro) {
+        appendContent(choices[0].message.content)
+      } else {
+        setValue('intro', choices[0].message.content)
+      }
     } catch {
       toast.error({
         title: 'An error occurred.',
@@ -90,7 +93,7 @@ export function IntroForm({
     } finally {
       setIsLoading(false)
     }
-  }, [appendContent, data.info.title, data.skills, getValues])
+  }, [appendContent, data.info.title, data.skills, getValues, setValue])
 
   return (
     <FormProvider {...form}>

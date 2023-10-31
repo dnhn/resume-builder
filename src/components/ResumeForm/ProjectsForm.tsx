@@ -77,8 +77,7 @@ export function ProjectsForm({
     (field: any, content: string) =>
       setValue(
         field,
-        `${getValues(field)}\n\n---
-\nHere is your generated content:\n\n${content}`,
+        `${content}\n\n---\n\n### Previous content:\n\n${getValues(field)}`,
       ),
     [getValues, setValue],
   )
@@ -104,7 +103,11 @@ export function ProjectsForm({
             }`,
           )
 
-          appendContent(descriptionField, choices[0].message.content)
+          if (description) {
+            appendContent(descriptionField, choices[0].message.content)
+          } else {
+            setValue(descriptionField as any, choices[0].message.content)
+          }
         } catch {
           toast.error({
             title: 'An error occurred.',
@@ -121,7 +124,7 @@ export function ProjectsForm({
         })
       }
     },
-    [appendContent, getValues],
+    [appendContent, getValues, setValue],
   )
 
   return (
