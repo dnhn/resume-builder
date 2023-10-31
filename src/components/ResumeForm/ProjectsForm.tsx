@@ -5,10 +5,7 @@ import { FormInput, FormTextarea } from 'components/FormInput'
 import { ResumeEnhancedInput } from 'components/ResumeEnhancedInput'
 import { Text } from 'components/Text'
 import { toast } from 'components/Toast'
-import { IconArrowSmDown } from 'components/icons/components/IconArrowSmDown'
-import { IconArrowSmUp } from 'components/icons/components/IconArrowSmUp'
-import { IconClose } from 'components/icons/components/IconClose'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useState } from 'react'
 import {
   FormProvider,
   SubmitHandler,
@@ -18,6 +15,8 @@ import {
 import { IResumeProject } from 'types/resume'
 import { completeChat } from 'utils/completeChat'
 import { z } from 'zod'
+import { FormCTA } from './FormCTA'
+import { ItemActions } from './ItemActions'
 
 const projectsSchema = z.object({
   projects: z.array(
@@ -125,73 +124,24 @@ export function ProjectsForm({
     [appendContent, getValues],
   )
 
-  const CTA = useMemo(
-    () => (
-      <div className="flex items-center justify-between">
-        <Button
-          appearance="secondary"
-          size="sm"
-          type="button"
-          onClick={() => append(newField)}
-        >
-          Add project
-        </Button>
-        <div className="space-x-2 text-right">
-          <Button size="sm" type="button" onClick={onComplete}>
-            Cancel
-          </Button>
-          <Button appearance="primary" size="sm" type="submit">
-            Save
-          </Button>
-        </div>
-      </div>
-    ),
-    [append, onComplete],
-  )
-
   return (
     <FormProvider {...form}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-4">
-          {CTA}
+          <FormCTA
+            addLabel="Add project"
+            handleAdd={() => append(newField)}
+            handleCancel={onComplete}
+          />
           {fields.map((field, index) => (
             <Card key={field.id} className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="space-x-2">
-                  {index > 0 && (
-                    <Button
-                      className="!rounded-full !p-2"
-                      size="sm"
-                      title="Move up"
-                      type="button"
-                      onClick={() => move(index, index - 1)}
-                    >
-                      <IconArrowSmUp />
-                    </Button>
-                  )}
-                  {index < fields.length - 1 && (
-                    <Button
-                      className="!rounded-full !p-2"
-                      size="sm"
-                      title="Move down"
-                      type="button"
-                      onClick={() => move(index, index + 1)}
-                    >
-                      <IconArrowSmDown />
-                    </Button>
-                  )}
-                </div>
-                <Button
-                  appearance="secondary"
-                  className="!rounded-full !p-2"
-                  size="sm"
-                  title="Remove"
-                  type="button"
-                  onClick={() => remove(index)}
-                >
-                  <IconClose />
-                </Button>
-              </div>
+              <ItemActions
+                fields={fields.length}
+                index={index}
+                moveDown={() => move(index, index + 1)}
+                moveUp={() => move(index, index - 1)}
+                remove={() => remove(index)}
+              />
               <div className="grid grid-cols-2 gap-4">
                 <FormInput
                   label="Name"
@@ -236,7 +186,13 @@ export function ProjectsForm({
               </div>
             </Card>
           ))}
-          {fields.length > 0 && CTA}
+          {fields.length > 0 && (
+            <FormCTA
+              addLabel="Add project"
+              handleAdd={() => append(newField)}
+              handleCancel={onComplete}
+            />
+          )}
         </div>
       </form>
     </FormProvider>
