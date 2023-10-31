@@ -31,6 +31,7 @@ export const putDbItem = (key: string, data: any) =>
       Item: {
         key,
         data,
+        datetime: new Date().toISOString(),
       },
     }),
   )
