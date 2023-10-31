@@ -136,8 +136,8 @@ export function ProjectsForm({
           {fields.map((field, index) => (
             <Card key={field.id} className="space-y-4">
               <ItemActions
-                fields={fields.length}
                 index={index}
+                lastIndex={fields.length - 1}
                 moveDown={() => move(index, index + 1)}
                 moveUp={() => move(index, index - 1)}
                 remove={() => remove(index)}

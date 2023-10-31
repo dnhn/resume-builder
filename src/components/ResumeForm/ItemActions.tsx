@@ -5,7 +5,7 @@ import { IconClose } from 'components/icons/components/IconClose'
 
 interface IFormActions {
   index: number
-  fields: number
+  lastIndex: number
   moveUp: VoidFunction
   moveDown: VoidFunction
   remove: VoidFunction
@@ -13,7 +13,7 @@ interface IFormActions {
 
 export const ItemActions = ({
   index,
-  fields,
+  lastIndex,
   moveDown,
   moveUp,
   remove,
@@ -31,7 +31,7 @@ export const ItemActions = ({
           <IconArrowSmUp />
         </Button>
       )}
-      {index < fields && (
+      {index < lastIndex && (
         <Button
           className="!rounded-full !p-2"
           size="sm"
