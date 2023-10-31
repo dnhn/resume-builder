@@ -41,7 +41,10 @@ const LoginPage = () => {
     defaultValues: loginFormDefaultValues,
     resolver: zodResolver(validationSchema),
   })
-  const { handleSubmit } = formInstance
+  const {
+    formState: { isSubmitSuccessful },
+    handleSubmit,
+  } = formInstance
 
   const onSubmit = async (data: typeof loginFormDefaultValues) => {
     setIsLoading(true)
@@ -97,7 +100,7 @@ const LoginPage = () => {
 
             <Button
               appearance="primary"
-              disabled={isLoading}
+              disabled={isLoading || isSubmitSuccessful}
               loading={isLoading}
               type="submit"
               fullWidth
